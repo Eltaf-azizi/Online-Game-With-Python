@@ -3,11 +3,11 @@ Represents a round of the game, storing things like word,
 time, skips, drawing player and more.
 """
 
-import time
-import threading
+import time as t
+from _thread import *
 
-class Rounf(object):
-    def init(self, word, playerdrawing, players):
+class Round(object):
+    def __init__(self, word, player_drawing, players):
 
         """
         init object
@@ -16,13 +16,24 @@ class Rounf(object):
         :param players: Player[]
         """
         self.word = word
-        self.playerdrawing = playerdrawing
-        self.playerguessed = []
+        self.player_drawing = player_drawing
+        self.player_guessed = []
         self.skips = 0
-        self.playerscores = {player:0 for player in players}
+        self.player_scores = {player:0 for player in players}
         self.time = 74
+        self.start = time.time()
+        start_new_thread(self.time_thread, ())
 
-    def timethread(self):
+    def time_thread(self):
+        """
+        removes player that left from scores and list
+        :param player: Player
+        :return: None
+        """
+        while(self.time > 0):
+            t.sleep(1)
+            self.time -= 1
+        self.end_round("Time is up")
 
 
     def guess(self, player , wrd):
@@ -35,22 +46,22 @@ class Rounf(object):
         """
         correct = wrd == self.wrd
         if correct:
-            self.playerguessed.append(player)
+            self.player_guessed.append(player)
             # TODO implement scoring system here
     
-    def playerleft(self, player):
+    def player_left(self, player):
         """
         removes player that left from scores and list
         :param player: Player
         :return: None
         """
-        if player in self.playerscores:
-            del playerscores[player]
+        if player in self.player_scores:
+            del self.player_scores[player]
 
-        if player in self.playerguessed:
-            self.playerguessed.remove(player)
-            self.endround()
+        if player in self.player_guessed:
+            self.player_guessed.remove(player)
+            self.end_round("Drawing player leaves")
 
-    def endround(self):
-        # TODO implement endround functionallity
+    def end_round(self, msg):
+        # TODO implement endround functionality
         pass
