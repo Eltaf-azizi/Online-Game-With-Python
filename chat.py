@@ -2,22 +2,25 @@
 Represent and stores information about the chat
 """
 
+from .round import Round
+
 class Chat(object):
 
-    def __init__(self):
+    def __init__(self, r):
         self.content = []
+        self.round = r
 
-    def updatechat(self, msg):
-        self.content.appenf(msg)
+    def update_chat(self, msg):
+        self.content.append(msg)
 
-    def getchat(self):
+    def get_chat(self):
         return self.content
     
-    def len(self):
+    def __len__(self):
         return len(self.content)
     
-    def str(self):
+    def __str__(self):
         return "".join(self.content)
     
-    def repr(self):
+    def __repr__(self):
         return str(self)

@@ -5,6 +5,8 @@ time, skips, drawing player and more.
 
 import time as t
 from _thread import *
+from .game import Game
+from .chat import Chat
 
 class Round(object):
     def __init__(self, word, player_drawing, players):
@@ -21,6 +23,7 @@ class Round(object):
         self.skips = 0
         self.player_scores = {player:0 for player in players}
         self.time = 74
+        self.chat = Chat(self)
         self.start = time.time()
         start_new_thread(self.time_thread, ())
 
