@@ -27,6 +27,8 @@ class Round(object):
         self.start = time.time()
         start_new_thread(self.time_thread, ())
 
+    def skip(self):
+
     def time_thread(self):
         """
         removes player that left from scores and list
