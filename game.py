@@ -15,12 +15,15 @@ class Game(object) :
         self.id = id
         self.players = players
         self.words_used = []
-        self.round = Round(self.getword())
+        self.round = None
         self.board = None
         self.playerdrawind = 0
+        self.startnewround()
+        self.createboard()
 
 
-
+    def createboard(self):
+        self.board = Board()
 
     def startnewround(self):
         """
@@ -33,6 +36,11 @@ class Game(object) :
         if self.playerdrawind >= len(self.players):
             self.endround()
             self.endgame()
+
+
+    
+
+
 
     def player_guess(self, player, guess) :
         """
@@ -57,20 +65,41 @@ class Game(object) :
         threshold, starts new round.
         :return: None
         """
-        if slef.round:
-            self.round.skip()
+        if self.round:
+            new_round = self.round.skip()
+            if new_round:
+                self.round_ended()
         else:
             raise Exception("No round started yet!")
-        pass
+
 
     def round_ended(self):
-        pass
+        """
+        If the round ends call this
+        :return: None
+        """
 
-    def update_board(self):
-        pass
+        self.startnewround()
+        self.createboard()
+
+    def update_board(self, x, y, color):
+        """
+        calls update method on board.
+        :param x: int
+        :param y: int
+        :param color: (int, int, int)
+        :return: None
+        """
+        if not self.board:
+            raise Exception("No board created")
+        self.board.update(x, y,color)
 
     def endgame(self):
-        pass
+        """
+        
+        :return:
+        """
+        # todo implement
 
     def getword(self):
         """

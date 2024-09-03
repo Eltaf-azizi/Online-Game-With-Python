@@ -28,6 +28,15 @@ class Round(object):
         start_new_thread(self.time_thread, ())
 
     def skip(self):
+        """
+        Return true if round skipped threshold met
+        :return: bool
+        """
+        self.skip += 1
+        if self.skip > len(self.player) - 2:
+            return True
+        
+        return False
 
     def time_thread(self):
         """
