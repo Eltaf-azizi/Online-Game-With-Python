@@ -9,7 +9,7 @@ from .game import Game
 from .chat import Chat
 
 class Round(object):
-    def __init__(self, word, player_drawing, players):
+    def __init__(self, word, player_drawing, players, game):
 
         """
         init object

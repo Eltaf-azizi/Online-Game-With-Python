@@ -27,7 +27,7 @@ class Game(object) :
         start a new round with a new word
         :return: None
         """
-        self.round = Round(self.getword(), self.players[self.player_draw_ind])
+        self.round = Round(self.getword(), self.players[self.player_draw_ind], self.players, self)
         self.player_draw_ind += 1
 
         if self.player_draw_ind >= len(self.players):
@@ -46,7 +46,7 @@ class Game(object) :
         :param guess: str
         :return bool
         """
-        pass
+        return self.round.guess(player, guess)
 
     def player_disconnected(self, player):
         """
