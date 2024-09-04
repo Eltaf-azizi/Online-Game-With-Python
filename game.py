@@ -16,26 +16,23 @@ class Game(object) :
         self.players = players
         self.words_used = []
         self.round = None
-        self.board = None
-        self.playerdrawind = 0
-        self.startnewround()
-        self.createboard()
-
-
-    def createboard(self):
         self.board = Board()
+        self.player_draw_ind = 0
+        self.connected.thread = thread
+        self.start_new_round()
 
-    def startnewround(self):
+
+    def start_new_round(self):
         """
         start a new round with a new word
         :return: None
         """
-        self.round = Round(self.getword(), self.players[self.playerdrawind])
-        self.playerdrawind += 1
+        self.round = Round(self.getword(), self.players[self.player_draw_ind])
+        self.player_draw_ind += 1
 
-        if self.playerdrawind >= len(self.players):
-            self.endround()
-            self.endgame()
+        if self.player_draw_ind >= len(self.players):
+            self.end_round()
+            self.end_game()
 
 
     
@@ -59,7 +56,7 @@ class Game(object) :
         """
         pass
 
-    def skip(slef):
+    def skip(self):
         """
         Increment the round skips, if skips are greater than
         threshold, starts new round.
@@ -79,8 +76,8 @@ class Game(object) :
         :return: None
         """
 
-        self.startnewround()
-        self.createboard()
+        self.start_new_round()
+        self.board.clear()
 
     def update_board(self, x, y, color):
         """
@@ -94,14 +91,14 @@ class Game(object) :
             raise Exception("No board created")
         self.board.update(x, y,color)
 
-    def endgame(self):
+    def end_game(self):
         """
         
         :return:
         """
         # todo implement
 
-    def getword(self):
+    def get_word(self):
         """
         gives a word that has not yet been used
         :return: str

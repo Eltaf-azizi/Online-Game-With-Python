@@ -37,6 +37,25 @@ class Round(object):
             return True
         
         return False
+    
+
+    def getscores(self):
+        """
+        :returns all the player scores
+        """
+        return self.scores
+    
+    def score(self, player):
+        """
+        gets aspecific players scores
+        :param player: Player
+        :return: int
+        """
+        if player in self.playerscores:
+            return self.playerscores[player]
+        
+        else:
+            raise Exception("Player not in score list")
 
     def time_thread(self):
         """
