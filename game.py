@@ -2,6 +2,7 @@
 from .player import Player
 from .board import Board
 from .round import Round
+import random
 
 class Game(object) :
 
@@ -14,7 +15,7 @@ class Game(object) :
         """
         self.id = id
         self.players = players
-        self.words_used = []
+        self.words_used = set()
         self.round = None
         self.board = Board()
         self.player_draw_ind = 0
@@ -27,7 +28,10 @@ class Game(object) :
         start a new round with a new word
         :return: None
         """
-        self.round = Round(self.getword(), self.players[self.player_draw_ind], self.players, self)
+
+        round_word = self.get_word()
+
+        self.round = Round(round_word, self.players[self.player_draw_ind], self.players, self)
         self.player_draw_ind += 1
 
         if self.player_draw_ind >= len(self.players):
@@ -54,6 +58,12 @@ class Game(object) :
         :param player: Player
         :raises: exception()
         """
+        
+        if player in self.players:
+            self.players.remove(player)
+            
+        else:
+            raise Exception("Player not in game")
         pass
 
     def skip(self):
@@ -98,11 +108,22 @@ class Game(object) :
         """
         # todo implement
 
+ 
     def get_word(self):
         """
         gives a word that has not yet been used
         :return: str
         """
-        # todo get a list of wortd from somewhere
-        pass
+        with open("words.txt", "r") as f:
+
+            words = []
+            for line in f:
+                wrd = line.strip()
+                if wrd not in words_used:
+                    words.append(wrd)
+
+                self.words_used.add(wrd)
+        
+            r = random.randint(0, len(words))
+            return words[r].strip()
 
