@@ -59,12 +59,20 @@ class Game(object) :
         :raises: exception()
         """
         
+        # todo check this
         if player in self.players:
+            playerind = self.player.index(player)
+            if playerind >= self.player_draw_ind:
+                self.player_draw_ind -= 1
             self.players.remove(player)
+            self.round.player_left(player)
             
+
         else:
             raise Exception("Player not in game")
-        pass
+        
+        if len(self.players) <= 2:
+            self.end_game()
 
     def skip(self):
         """
@@ -103,11 +111,13 @@ class Game(object) :
 
     def end_game(self):
         """
-        
+        ends the game
         :return:
         """
         # todo implement
 
+        for player in self.players:
+            self.round.player_left(player)
  
     def get_word(self):
         """

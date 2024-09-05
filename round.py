@@ -24,7 +24,6 @@ class Round(object):
         self.player_scores = {player:0 for player in players}
         self.time = 74
         self.chat = Chat(self)
-        self.start = time.time()
         start_new_thread(self.time_thread, ())
 
     def skip(self):
@@ -97,4 +96,4 @@ class Round(object):
 
     def end_round(self, msg):
         # TODO implement endround functionality
-        pass
+        self.game.round_ended()
