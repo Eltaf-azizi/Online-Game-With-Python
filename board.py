@@ -9,7 +9,7 @@ class Board(object):
         """
         init the board by creating empty board (all white pixels)
         """
-        self.data = self.createemptyboard()
+        self.data = self.create_empty_board()
 
     def update(self, x, y, color):
         """
