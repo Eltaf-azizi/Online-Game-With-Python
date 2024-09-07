@@ -5,7 +5,6 @@ time, skips, drawing player and more.
 
 import time as t
 from _thread import *
-import threading
 from .game import Game
 from .chat import Chat
 
@@ -25,7 +24,7 @@ class Round(object):
         self.player_scores = {player:0 for player in players}
         self.time = 74
         self.chat = Chat(self)
-        threading.Timer(1, self.time_thread)
+        start_new_thread( self.time_thread, ())
 
     def skip(self):
         """
@@ -64,9 +63,9 @@ class Round(object):
         :return: None
         """
 
-        self.time -= 1
-
-        if self.time <= 0:
+        while self.time > 0:
+            t.sleep(1)
+            self.time -= 1
             self.end_round("Time is up")
 
 
@@ -97,5 +96,4 @@ class Round(object):
             self.end_round("Drawing player leaves")
 
     def end_round(self, msg):
-        # TODO implement endround functionality
         self.game.round_ended()
