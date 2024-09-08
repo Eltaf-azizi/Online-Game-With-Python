@@ -13,8 +13,16 @@ from .game import Game
 from quene import Quene
 
 
+connection_queue = []
 
 def player_thread(conn, ip, name):
+    """
+    handles in game communication between clients
+    :param conn: connection object
+    :param ip: str
+    :param name: str
+    :return: None
+    """
     pass
 
 def authentication(conn, addr):
@@ -32,13 +40,14 @@ def authentication(conn, addr):
             raise Exception("No name recieved")
         
         conn.sendall("1".encode())
-        
+
+        threading.Thread(target=player_thread, args={conn, addr, name})
 
     except Exception as e:
         print("EXCEPTION", e)
         conn.close()
 
-    threading.Thread(target=player_thread, args={conn, addr, name})
+    
 
 
 
