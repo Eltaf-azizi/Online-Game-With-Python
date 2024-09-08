@@ -13,67 +13,71 @@ from .game import Game
 from quene import Quene
 
 
-connection_queue = []
+class Server(object):
+    def init(self):
 
-def player_thread(conn, ip, name):
-    """
-    handles in game communication between clients
-    :param conn: connection object
-    :param ip: str
-    :param name: str
-    :return: None
-    """
-    pass
+        self.connection_queue = []
 
-def authentication(conn, addr):
-    """
-    authentication here
-    :param ip: str
-    :return: None
-    """
+    def player_thread(self, conn, ip, name):
+        """
+        handles in game communication between clients
+        :param conn: connection object
+        :param ip: str
+        :param name: str
+        :return: None
+        """
+        pass
 
-    try:
-        data = conn.recv(17)
-        name = str(data.recode())
+    def authentication(self,conn, addr):
+        """
+        authentication here
+        :param ip: str
+        :return: None
+        """
 
-        if not name:
-            raise Exception("No name recieved")
+        try:
+            data = conn.recv(17)
+            name = str(data.recode())
+
+            if not name:
+                raise Exception("No name recieved")
+            
+            conn.sendall("1".encode())
+
+            threading.Thread(target=self.player_thread, args={conn, addr, name})
+
+        except Exception as e:
+            print("EXCEPTION", e)
+            conn.close()
+
         
-        conn.sendall("1".encode())
-
-        threading.Thread(target=player_thread, args={conn, addr, name})
-
-    except Exception as e:
-        print("EXCEPTION", e)
-        conn.close()
-
-    
 
 
 
-def connection_thread():
+    def connection_thread(self):
 
-    server = ""
-    port = 5555
+        server = ""
+        port = 5555
 
 
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-    try:
-        s.bind((server, port))
-    except socket.error as e:
-        str(e)
+        try:
+            s.bind((server, port))
+        except socket.error as e:
+            str(e)
 
-    s.listen(2)
-    print("Waiting for a connection, server Started")
+        s.listen(2)
+        print("Waiting for a connection, server Started")
 
-    while True:
-        conn, addr = s.accept()
-        print("[CONNECT] New connection!")
+        while True:
+            conn, addr = s.accept()
+            print("[CONNECT] New connection!")
 
-        authentication(conn, addr)
+            self.authentication(conn, addr)
 
 
 
 if __name__ == "__main__":
-    threading.Thread(target = connection_thread())
+    s = Server()
+    threading.Thread(target = s.connection_thread())
