@@ -8,7 +8,7 @@ import socket
 import threading
 from _thread import *
 import time
-from .player import player
+from .player import Player
 from .game import Game
 from quene import Quene
 
@@ -18,7 +18,7 @@ class Server(object):
 
         self.connection_queue = []
 
-    def player_thread(self, conn, ip, name):
+    def player_thread(self, conn, player):
         """
         handles in game communication between clients
         :param conn: connection object
@@ -26,7 +26,12 @@ class Server(object):
         :param name: str
         :return: None
         """
-        pass
+        while True:
+            try:
+
+            except Exception as e:
+                print(f"[EXCEPTION] {player.get_name()} disconnected:" e)
+        
 
     def authentication(self,conn, addr):
         """
@@ -43,8 +48,9 @@ class Server(object):
                 raise Exception("No name recieved")
             
             conn.sendall("1".encode())
+            player = Player(addr, name)
 
-            threading.Thread(target=self.player_thread, args={conn, addr, name})
+            threading.Thread(target=self.player_thread, args={conn, player})
 
         except Exception as e:
             print("EXCEPTION", e)
@@ -80,4 +86,4 @@ class Server(object):
 
 if __name__ == "__main__":
     s = Server()
-    threading.Thread(target = s.connection_thread())
+    threading.Thread(target = s.connection_thread)
