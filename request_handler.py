@@ -14,7 +14,7 @@ from quene import Quene
 
 
 
-def playerthread(conn, ip, name):
+def player_thread(conn, ip, name):
     pass
 
 def authentication(conn, addr):
@@ -27,16 +27,22 @@ def authentication(conn, addr):
     try:
         data = conn.recv(17)
         name = str(data.recode())
+
+        if not name:
+            raise Exception("No name recieved")
+        
+        conn.sendall("1".encode())
         
 
     except Exception as e:
         print("EXCEPTION", e)
+        conn.close()
 
-    threading.Thread(target=playerthread, args={conn, addr, name})
+    threading.Thread(target=player_thread, args={conn, addr, name})
 
 
 
-def connectionhtread():
+def connection_thread():
 
     server = ""
     port = 5555
@@ -57,3 +63,8 @@ def connectionhtread():
         print("[CONNECT] New connection!")
 
         authentication(conn, addr)
+
+
+
+if __name__ == "__main__":
+    threading.Thread(target = connection_thread())
