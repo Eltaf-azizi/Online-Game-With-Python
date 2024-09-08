@@ -14,6 +14,28 @@ from quene import Quene
 
 
 
+def playerthread(conn, ip, name):
+    pass
+
+def authentication(conn, addr):
+    """
+    authentication here
+    :param ip: str
+    :return: None
+    """
+
+    try:
+        data = conn.recv(17)
+        name = str(data.recode())
+        
+
+    except Exception as e:
+        print("EXCEPTION", e)
+
+    threading.Thread(target=playerthread, args={conn, addr, name})
+
+
+
 def connectionhtread():
 
     server = ""
@@ -34,4 +56,4 @@ def connectionhtread():
         conn, addr = s.accept()
         print("[CONNECT] New connection!")
 
-        threading.Thread(target=, {addr,""})
+        authentication(conn, addr)
