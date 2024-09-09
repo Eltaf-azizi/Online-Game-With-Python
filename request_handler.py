@@ -45,7 +45,17 @@ class Server(object):
         :return: None
         """
 
-        
+        self.connection_queue.append(player)
+        if len(self.connection_queue) >= 8:
+            game = Game(self.connection_queue[:], self.gameId)
+            
+
+        for p in self.connection_queue:
+            p.set_game(game)
+
+
+        self.gameId +=1
+        self.connection_queue = []
         
 
 
