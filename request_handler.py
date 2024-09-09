@@ -14,7 +14,10 @@ from quene import Quene
 
 
 class Server(object):
+    PLAYER = 8
     def init(self):
+        self.connection_queue = []
+        self.gameId = 0
 
         self.connection_queue = []
 
@@ -28,10 +31,24 @@ class Server(object):
         """
         while True:
             try:
-
+                # player is not apart of game
             except Exception as e:
                 print(f"[EXCEPTION] {player.get_name()} disconnected:" e)
         
+
+
+
+    def handle_queue(self, player):
+        """
+        adds player to queue and creates new game if enough players
+        :param player: player
+        :return: None
+        """
+
+        
+        
+
+
 
     def authentication(self,conn, addr):
         """
@@ -49,6 +66,7 @@ class Server(object):
             
             conn.sendall("1".encode())
             player = Player(addr, name)
+            self.handlequeue(player)
 
             threading.Thread(target=self.player_thread, args={conn, player})
 
