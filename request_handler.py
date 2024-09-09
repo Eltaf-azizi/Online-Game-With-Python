@@ -30,16 +30,48 @@ class Server(object):
         """
         while True:
             try:
-                sendmsg = -2
+                
                 data = conn.recv(1024)
                 data = json.load(data)
 
 
                 # player is not apart of game
+                keys = [key for key in data.keys()]
+                send_msg = {key:[] for key in keys}
 
-                conn.sendall(json.dumps(sendmsg))
+                for key in keys:
+                    if key == -1:
+
+                    elif key == 0:
+
+                    elif key == 1:
+
+                    elif key == 2:
+
+                    elif key == 3:
+                    
+                    elif key == 4:
+
+                    elif key == 1:
+                        
+                    elif key == 0:
+
+                    elif key == 7:
+                    
+                    elif key == 8:
+
+                    elif key == 9:
+
+                    else:
+                        raise Exception("Not valid request")
+                        
+                        
+
+
+                conn.sendall(json.dumps(send_msg))
             except Exception as e:
-                print(f"[EXCEPTION] {player.get_name()} disconnected:" e)
+                print(f"[EXCEPTION] {player.get_name()} disconnected:", e)
+                conn.close()
         
 
 
