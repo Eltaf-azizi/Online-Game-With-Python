@@ -6,11 +6,10 @@ creating new games and requests from the client(s)
 
 import socket
 import threading
-from _thread import *
 import time
 from .player import Player
 from .game import Game
-from quene import Quene
+import json
 
 
 class Server(object):
@@ -31,7 +30,14 @@ class Server(object):
         """
         while True:
             try:
+                sendmsg = -2
+                data = conn.recv(1024)
+                data = json.load(data)
+
+
                 # player is not apart of game
+
+                conn.sendall(json.dumps(sendmsg))
             except Exception as e:
                 print(f"[EXCEPTION] {player.get_name()} disconnected:" e)
         
