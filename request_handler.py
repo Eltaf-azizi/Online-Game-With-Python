@@ -40,27 +40,27 @@ class Server(object):
                 send_msg = {key:[] for key in keys}
 
                 for key in keys:
-                    if key == -1:
+                    if key == -1: # get game
 
-                    elif key == 0:
+                    elif key == 0:# guess
 
-                    elif key == 1:
+                    elif key == 1:# skip
 
-                    elif key == 2:
+                    elif key == 2:# get chat
 
-                    elif key == 3:
+                    elif key == 3:# get board
                     
-                    elif key == 4:
+                    elif key == 4:# get score
 
-                    elif key == 1:
+                    elif key == 5:# get round
                         
-                    elif key == 0:
+                    elif key == 6:# get word
 
-                    elif key == 7:
+                    elif key == 7:# get skips
                     
-                    elif key == 8:
+                    elif key == 8:# update board
 
-                    elif key == 9:
+                    elif key == 9:# get method time
 
                     else:
                         raise Exception("Not valid request")
@@ -72,6 +72,7 @@ class Server(object):
             except Exception as e:
                 print(f"[EXCEPTION] {player.get_name()} disconnected:", e)
                 conn.close()
+                # todo call player game disconnec method
         
 
 
