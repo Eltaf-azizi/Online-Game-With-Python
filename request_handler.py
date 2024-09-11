@@ -41,29 +41,41 @@ class Server(object):
 
                 for key in keys:
                     if key == -1: # get game
+                        if player.game:
+                            send_msg [-1] = player.game.players
+                        else:
+                            send_msg[-1] = []
 
-                    elif key == 0:# guess
+                    if player.game:
+                        if key == 0:# guess
+                            correct = player.game.player_guess(player, data[0][0])
+                            send_msg[0] = [correct]
 
-                    elif key == 1:# skip
+                        elif key == 1:# skip
+                            skip = player.game.skip()
+                            send_msg[0] = [skip]
 
-                    elif key == 2:# get chat
-
-                    elif key == 3:# get board
-                    
-                    elif key == 4:# get score
-
-                    elif key == 5:# get round
+                        elif key == 2:# get chat
+                            content = player.game.round.chat.getchat()
+                            send_msg[2] = content
+                        elif key == 3:# get board
+                            brd = player.game.board.getboard()
+                            send_msg[3] = brd 
                         
-                    elif key == 6:# get word
+                        elif key == 4:# get score
 
-                    elif key == 7:# get skips
-                    
-                    elif key == 8:# update board
+                        elif key == 5:# get round
+                            
+                        elif key == 6:# get word
 
-                    elif key == 9:# get method time
+                        elif key == 7:# get skips
+                        
+                        elif key == 8:# update board
 
-                    else:
-                        raise Exception("Not valid request")
+                        elif key == 9:# get method time
+
+                        else:
+                            raise Exception("Not valid request")
                         
                         
 
