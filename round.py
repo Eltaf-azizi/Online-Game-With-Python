@@ -97,4 +97,6 @@ class Round(object):
             self.end_round("Drawing player leaves")
 
     def end_round(self, msg):
+        for player in self.player:
+            player.update_score(self.player_scores[player])
         self.game.round_ended()

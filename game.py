@@ -74,6 +74,10 @@ class Game(object) :
         if len(self.players) <= 2:
             self.end_game()
 
+
+    def get_player_scores(self):
+        scores = {player:player.getscore() for player in self.players}
+
     def skip(self):
         """
         Increment the round skips, if skips are greater than
