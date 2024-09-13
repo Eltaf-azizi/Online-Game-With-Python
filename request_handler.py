@@ -47,32 +47,45 @@ class Server(object):
                             send_msg[-1] = []
 
                     if player.game:
-                        if key == 0:# guess
+                        if key == 0: # guess
                             correct = player.game.player_guess(player, data[0][0])
                             send_msg[0] = [correct]
 
-                        elif key == 1:# skip
+                        elif key == 1: # skip
                             skip = player.game.skip()
                             send_msg[0] = [skip]
 
-                        elif key == 2:# get chat
+                        elif key == 2: # get chat
                             content = player.game.round.chat.getchat()
                             send_msg[2] = content
-                        elif key == 3:# get board
-                            brd = player.game.board.getboard()
+                        elif key == 3: # get board
+                            brd = player.game.board.get_board()
                             send_msg[3] = brd 
                         
-                        elif key == 4:# get score
+                        elif key == 4: # get score
+                            scores = player.game.get_player_scores()
+                            send_msg[4] = scores
 
-                        elif key == 5:# get round
+                        elif key == 5: # get round
+                            rnd = player.game.round_count
+                            send_msg[5] = rnd
                             
-                        elif key == 6:# get word
+                        elif key == 6: # get word
+                            wrd = player.game.round.word
+                            send_msg[6] = wrd
 
-                        elif key == 7:# get skips
+                        elif key == 7: # get skips
+                            skips = player.game.round.skips
+                            send_msg[7] = skips
                         
-                        elif key == 8:# update board
+                        elif key == 8: # update board
+                            x, y, color = data[8][:3]
+                            self.game.update_board(x, y, color)
 
-                        elif key == 9:# get method time
+                        elif key == 9: # get method time
+                            t = self.game.round.time
+                            send_msg[9] = t
+                            
 
                         else:
                             raise Exception("Not valid request")

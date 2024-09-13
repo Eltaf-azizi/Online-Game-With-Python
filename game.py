@@ -19,7 +19,7 @@ class Game(object) :
         self.round = None
         self.board = Board()
         self.player_draw_ind = 0
-        self.connected.thread = thread
+        self.round_count = 1
         self.start_new_round()
 
 
@@ -33,6 +33,7 @@ class Game(object) :
 
         self.round = Round(round_word, self.players[self.player_draw_ind], self.players, self)
         self.player_draw_ind += 1
+        self.round_count += 1
 
         if self.player_draw_ind >= len(self.players):
             self.end_round()
