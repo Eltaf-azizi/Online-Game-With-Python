@@ -4,11 +4,11 @@ Handles all of the connections,
 creating new games and requests from the client(s)
 """
 
+
 import socket
 import threading
-import time
-from .player import Player
-from .game import Game
+from player import Player
+from game import Game
 import json
 
 
@@ -132,7 +132,7 @@ class Server(object):
         """
 
         try:
-            data = conn.recv(17)
+            data = conn.recv(1024)
             name = str(data.recode())
 
             if not name:
