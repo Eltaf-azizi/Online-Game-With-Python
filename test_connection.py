@@ -18,13 +18,22 @@ class Network:
             return json.loads(self.recv(2028))
         except Exception as e:
             print(e)
+            self.disconnect(e)
     
     def send(self, data):
         try:
-            self.client.send(json.dumps(data))
+            self.client.send(self.name.encode())
             return json.loads(self.client.recv(2028))
         except socket.error as e:
-            print(e)
+            self.client.disconnect(e)
+
+    
+    def disconnect(self, msg):
+        print("[EXCEPTION] Disconnected from server: ", msg)
+        self.client.close()
+
     
 
 n = Network("Tech With Tim")
+print(n.connect())
+print(n.send({0:""}))
