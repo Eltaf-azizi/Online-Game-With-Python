@@ -97,6 +97,7 @@ class Server(object):
             except Exception as e:
                 print(f"[EXCEPTION] {player.get_name()} disconnected:", e)
                 conn.close()
+                break
                 # todo call player game disconnec method
         
 
@@ -156,7 +157,7 @@ class Server(object):
     def connection_thread(self):
 
         server = ""
-        port = 5555
+        port = 5500
 
 
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -166,7 +167,7 @@ class Server(object):
         except socket.error as e:
             str(e)
 
-        s.listen(2)
+        s.listen(1)
         print("Waiting for a connection, server Started")
 
         while True:

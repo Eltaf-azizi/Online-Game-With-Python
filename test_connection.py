@@ -3,15 +3,19 @@ import json
 
 
 class Network:
-    def init (self, name):
-        self.client = socket.socket(socket.AFINET, socket.SOCKSTREAM)
+
+    def __init__ (self, name):
+
+        self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.client.socketopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.server = "localhost"
-        self.port = 5555
+        self.port = 5500
         self.addr = (self.server, self.port)
         self.name = name
         self.connect()
 
     def connect(self):
+
         try:
             self.client.connect(self.addr)
             self.client.sendall(self.name.encode())
@@ -20,9 +24,12 @@ class Network:
             print(e)
             self.disconnect(e)
     
+    
+
     def send(self, data):
+
         try:
-            self.client.send(json.dumps(data))
+            self.client.send(data.encode())
             return json.loads(self.client.recv(2028))
         except socket.error as e:
             self.disconnect(e)
@@ -33,8 +40,8 @@ class Network:
         self.client.shutdown()
         self.client.close()
 
-    
 
 n = Network("Tech With Tim")
 print(n.connect())
-print(n.send({0:""}))
+print(n.send('{0:[]}'))
+
