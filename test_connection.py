@@ -30,14 +30,14 @@ class Network:
 
         try:
             self.client.send(data.encode())
-            return json.loads(self.client.recv(2028))
+            return json.loads(self.client.recv(2028).decode())
         except socket.error as e:
             self.disconnect(e)
 
     
     def disconnect(self, msg):
         print("[EXCEPTION] Disconnected from server: ", msg)
-        self.client.shutdown()
+        self.client.shutdown(socket.SHUT_RDWR)
         self.client.close()
 
 
