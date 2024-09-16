@@ -97,7 +97,6 @@ class Server(object):
             except Exception as e:
                 print(f"[EXCEPTION] {player.get_name()} disconnected:", e)
                 conn.close()
-                self.client.shutdown(socket.SHUT_RDWR)
                 break
                 # todo call player game disconnec method
         

@@ -37,11 +37,9 @@ class Network:
     
     def disconnect(self, msg):
         print("[EXCEPTION] Disconnected from server: ", msg)
-        self.client.shutdown(socket.SHUT_RDWR)
         self.client.close()
 
 
 n = Network("Tech With Tim")
-print(n.connect())
 print(n.send('{0:[]}'))
 
