@@ -41,5 +41,5 @@ class Network:
 
 
 n = Network("Tech With Tim")
-print(n.send('{0:[]}'))
+print(n.send("0"))
 

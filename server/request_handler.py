@@ -32,11 +32,12 @@ class Server(object):
             try:
                 
                 data = conn.recv(1024)
-                data = json.load(data.decode())
+                data = data.decode()
+                print("[LOG] Recieved data:", data)
 
 
                 # player is not apart of game
-                keys = [key for key in data.keys()]
+                keys = [key for key in data.split(',')]
                 send_msg = {key:[] for key in keys}
 
                 for key in keys:
