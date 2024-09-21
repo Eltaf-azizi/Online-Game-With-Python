@@ -32,16 +32,16 @@ class Server(object):
             try:
                 
                 data = conn.recv(1024)
-                data = data.decode()
+                data = json.loads(data.decode())
                 print("[LOG] Recieved data:", data)
 
 
                 # player is not apart of game
-                keys = [key for key in data.split(',')]
-                send_msg = {key:[] for key in keys}
+                keys = data.keys()
+                send_msg = {int(key):[] for key in keys}
 
                 for key in keys:
-                    if key == -1: # get game
+                    if key == -1: # get game, return a list of players
                         if player.game:
                             send_msg [-1] = player.game.players
                         else:
@@ -81,10 +81,10 @@ class Server(object):
                         
                         elif key == 8: # update board
                             x, y, color = data[8][:3]
-                            self.game.update_board(x, y, color)
+                            player.game.update_board(x, y, color)
 
                         elif key == 9: # get method time
-                            t = self.game.round.time
+                            t = player.game.round.time
                             send_msg[9] = t
                             
 
@@ -94,7 +94,8 @@ class Server(object):
                         
 
 
-                conn.sendall(json.dumps(send_msg))
+                print(send_msg)
+                conn.sendall(json.dumps(send_msg).encode())
             except Exception as e:
                 print(f"[EXCEPTION] {player.get_name()} disconnected:", e)
                 conn.close()
