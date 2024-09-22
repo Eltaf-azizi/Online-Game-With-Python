@@ -13,7 +13,7 @@ import json
 
 
 class Server(object):
-    PLAYER = 8
+    PLAYER = 1
     def init(self):
         self.connection_queue = []
         self.gameId = 0
@@ -30,11 +30,15 @@ class Server(object):
         """
         while True:
             try:
-                
-                data = conn.recv(1024)
-                data = json.loads(data.decode())
-                print("[LOG] Recieved data:", data)
+                # receive request
 
+                try:
+                    data = conn.recv(1024)
+                    data = json.loads(data.decode())
+                    print("[LOG] Recieved data:", data)
+
+                except:
+                    break
 
                 # player is not apart of game
                 keys = data.keys()
@@ -88,20 +92,24 @@ class Server(object):
                             send_msg[9] = t
                             
 
-                        else:
-                            raise Exception("Not valid request")
+                    if key == 10: # Disconnected code
+                        raise Exception("Not valid request")
                         
                         
 
 
-                print(send_msg)
-                conn.sendall(json.dumps(send_msg).encode())
+                send_msg = json.dumps(send_msg)
+                conn.sendall(send_msg.encode())
+
             except Exception as e:
                 print(f"[EXCEPTION] {player.get_name()} disconnected:", e)
-                conn.close()
                 break
-                # todo call player game disconnec method
+                # todo call player game disconnect method
+
+        print(F"[DISCONNECT] {player.name} DISCONNECTED")
+        conn.close()
         
+
 
 
 
