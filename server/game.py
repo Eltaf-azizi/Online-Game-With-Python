@@ -32,15 +32,15 @@ class Game(object) :
         round_word = self.get_word()
 
         self.round = Round(round_word, self.players[self.player_draw_ind], self.players, self)
-        self.player_draw_ind += 1
         self.round_count += 1
 
         if self.player_draw_ind >= len(self.players):
-            self.end_round()
+            self.round_ended()
             self.end_game()
 
 
-    
+        
+        self.player_draw_ind += 1
 
 
 

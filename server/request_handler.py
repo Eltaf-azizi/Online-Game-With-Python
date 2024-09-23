@@ -41,13 +41,17 @@ class Server(object):
                     break
 
                 # player is not apart of game
-                keys = data.keys()
+                keys = [int(key)for key in data.keys()]
                 send_msg = {int(key):[] for key in keys}
 
                 for key in keys:
                     if key == -1: # get game, return a list of players
                         if player.game:
-                            send_msg [-1] = player.game.players
+
+
+                            send = {player.get_name():player.get_score() for player in player.game.players}
+
+                            send_msg [-1] = send
                         else:
                             send_msg[-1] = []
 
@@ -91,13 +95,8 @@ class Server(object):
                             t = player.game.round.time
                             send_msg[9] = t
                             
-
-                    if key == 10: # Disconnected code
-                        raise Exception("Not valid request")
                         
                         
-
-
                 send_msg = json.dumps(send_msg)
                 conn.sendall(send_msg.encode())
 
@@ -121,8 +120,8 @@ class Server(object):
         """
 
         self.connection_queue.append(player)
-        if len(self.connection_queue) >= 8:
-            game = Game(self.connection_queue[:], self.gameId)
+        if len(self.connection_queue) >= self.PLAYERS:
+            game = Game(self.gameId, self.connection_queue[:])
             
 
         for p in self.connection_queue:

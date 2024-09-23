@@ -37,7 +37,7 @@ class Network:
     
     def disconnect(self, msg):
         print("[EXCEPTION] Disconnected from server: ", msg)
-        self.send({10:[]})
+
         self.client.close()
 
 
