@@ -23,7 +23,7 @@ class Round(object):
         self.skips = 0
         self.player_scores = {player:0 for player in players}
         self.time = 74
-        self.player_scores = players
+        self.players = players
         self.game = Game
         self.chat = Chat(self)
         start_new_thread( self.time_thread, ())
@@ -83,6 +83,8 @@ class Round(object):
         if correct:
             self.player_guessed.append(player)
             # TODO implement scoring system here
+            return True
+        return False
     
     def player_left(self, player):
         """

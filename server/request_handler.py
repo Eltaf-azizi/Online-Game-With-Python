@@ -37,7 +37,8 @@ class Server(object):
                     data = json.loads(data.decode())
                     print("[LOG] Recieved data:", data)
 
-                except:
+                except Exception as e:
+                    print(e)
                     break
 
                 # player is not apart of game
@@ -57,12 +58,13 @@ class Server(object):
 
                     if player.game:
                         if key == 0: # guess
-                            correct = player.game.player_guess(player, data[0][0])
-                            send_msg[0] = [correct]
+                            correct = player.game.player_guess(player, data['0'][0])
+                            send_msg[0] = correct
 
                         elif key == 1: # skip
                             skip = player.game.skip()
-                            send_msg[0] = [skip]
+                            print(skip)
+                            send_msg[1] = [skip]
 
                         elif key == 2: # get chat
                             content = player.game.round.chat.getchat()
@@ -103,9 +105,10 @@ class Server(object):
             except Exception as e:
                 print(f"[EXCEPTION] {player.get_name()} disconnected:", e)
                 break
-                # todo call player game disconnect method
+                
 
         print(F"[DISCONNECT] {player.name} DISCONNECTED")
+        # player.game.player_disconnected(player)
         conn.close()
         
 
