@@ -38,7 +38,6 @@ class Server(object):
                     print("[LOG] Recieved data:", data)
 
                 except Exception as e:
-                    print(e)
                     break
 
                 # player is not apart of game
@@ -63,7 +62,6 @@ class Server(object):
 
                         elif key == 1: # skip
                             skip = player.game.skip()
-                            print(skip)
                             send_msg[1] = [skip]
 
                         elif key == 2: # get chat

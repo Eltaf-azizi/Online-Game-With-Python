@@ -9,7 +9,7 @@ from game import Game
 from chat import Chat
 
 class Round(object):
-    def __init__(self, word, player_drawing, players, game):
+    def __init__(self, word, player_drawing, game):
 
         """
         init object
@@ -21,10 +21,9 @@ class Round(object):
         self.player_drawing = player_drawing
         self.player_guessed = []
         self.skips = 0
-        self.player_scores = {player:0 for player in players}
         self.time = 74
-        self.players = players
-        self.game = Game
+        self.game = game
+        self.player_scores = {player:0 for player in self.game.players}
         self.chat = Chat(self)
         start_new_thread( self.time_thread, ())
 
@@ -34,7 +33,7 @@ class Round(object):
         :return: bool
         """
         self.skip += 1
-        if self.skip > len(self.player) - 2:
+        if self.skip > len(self.game.player) - 2:
             return True
         
         return False
@@ -44,7 +43,7 @@ class Round(object):
         """
         :returns all the player scores
         """
-        return self.scores
+        return self.player_scores
     
     def score(self, player):
         """
@@ -52,8 +51,8 @@ class Round(object):
         :param player: Player
         :return: int
         """
-        if player in self.playerscores:
-            return self.playerscores[player]
+        if player in self.player_scores:
+            return self.player_scores[player]
         
         else:
             raise Exception("Player not in score list")
@@ -100,6 +99,7 @@ class Round(object):
             self.end_round("Drawing player leaves")
 
     def end_round(self, msg):
-        for player in self.player:
-            player.update_score(self.player_scores[player])
+        for player in self.game.player:
+            if self in self.player_scores:
+                player.update_score(self.player_scores[player])
         self.game.round_ended()
