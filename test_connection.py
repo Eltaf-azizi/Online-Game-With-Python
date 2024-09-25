@@ -30,7 +30,17 @@ class Network:
 
         try:
             self.client.send(data.encode())
-            return json.loads(self.client.recv(2028).decode())
+
+            d = ""
+            last = 1
+
+            while last:
+                last = self.client.recv(1024).decode()
+                print(last)
+                d += last
+            print(d) 
+
+            return json.loads(self.client.recv(20000000).decode())
         except socket.error as e:
             self.disconnect(e)
 
