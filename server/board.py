@@ -29,7 +29,7 @@ class Board(object):
         self.data = self.createemptyboard()
 
     def create_empty_board(self):
-        return [[{244, 244, 244} for _ in range(self.COLS) for _ in range(self.ROWS)]]
+        return [[0 for _ in range(self.COLS) for _ in range(self.ROWS)]]
     
     def fill(self, x, y):
         """

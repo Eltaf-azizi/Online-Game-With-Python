@@ -32,15 +32,20 @@ class Network:
             self.client.send(data.encode())
 
             d = ""
-            last = 1
+            while 1:
 
-            while last:
                 last = self.client.recv(1024).decode()
-                print(last)
                 d += last
+                
+                try:
+                    if last.count("}") == 1:
+                        break
+
+                except:
+                    pass
             print(d) 
 
-            return json.loads(self.client.recv(20000000).decode())
+            return json.loads(d)
         except socket.error as e:
             self.disconnect(e)
 
@@ -52,5 +57,5 @@ class Network:
 
 
 n = Network("Tech With Tim")
-print(n.send({0:[]}))
+print(n.send({3:[]}))
 
