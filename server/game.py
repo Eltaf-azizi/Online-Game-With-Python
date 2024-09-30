@@ -86,7 +86,7 @@ class Game(object) :
         give a dict of player scores
         :return: dict
         """
-        scores = {player:player.getscore() for player in self.players}
+        scores = {player.name:player.getscore() for player in self.players}
         return scores
 
     def skip(self):

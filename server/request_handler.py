@@ -99,6 +99,7 @@ class Server(object):
                         
                 send_msg = json.dumps(send_msg)
                 conn.sendall(send_msg.encode())
+                conn.sendall(".".encode())
 
             except Exception as e:
                 print(f"[EXCEPTION] {player.get_name()} disconnected:", e)

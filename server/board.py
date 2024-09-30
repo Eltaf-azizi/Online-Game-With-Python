@@ -16,7 +16,7 @@ class Board(object):
         updates a singular of the pixel
         :param x: int
         :param y: int
-        :param color: (int, int, int)
+        :param color: 0-8
         :return: 
         """
         self.data[y][x] = color

@@ -35,17 +35,28 @@ class Network:
             while 1:
 
                 last = self.client.recv(1024).decode()
-                d += last
-                
                 try:
-                    if last.count("}") == 1:
+                    if last == ".":
                         break
 
                 except:
                     pass
-            print(d) 
 
-            return json.loads(d)
+                d += last
+
+                try:
+                    if last.count("}") == 1:
+                        d = d[:-1]
+                        break
+                except:
+                    pass
+
+
+                
+        
+
+            keys = [key for key in data.keys()]
+            return json.loads(d)[str(keys[0])]
         except socket.error as e:
             self.disconnect(e)
 
@@ -57,5 +68,15 @@ class Network:
 
 
 n = Network("Tech With Tim")
-print(n.send({3:[]}))
+board = n.send({3:[]})
+print(board)
 
+
+# white 1
+# black 2
+# red 3
+# green 4
+# yellow 5
+# orange 6
+# brown 7
+# purple 8
