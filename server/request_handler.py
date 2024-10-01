@@ -37,8 +37,10 @@ class Server(object):
                     data = json.loads(data.decode())
                     print("[LOG] Recieved data:", data)
 
+
                 except Exception as e:
                     break
+
 
                 # player is not apart of game
                 keys = [int(key)for key in data.keys()]

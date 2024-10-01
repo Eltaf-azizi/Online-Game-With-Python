@@ -1,5 +1,6 @@
 import socket
 import json 
+import time as t
 
 
 class Network:
@@ -16,6 +17,16 @@ class Network:
 
     def connect(self):
 
+        try:
+            self.client.connect(self.addr)
+            self.client.sendall(self.name.encode())
+            return json.loads(self.recv(2028))
+        except Exception as e:
+            print(e)
+            self.disconnect(e)
+
+    
+    def str_str(self, data):
         try:
             self.client.connect(self.addr)
             self.client.sendall(self.name.encode())
@@ -42,11 +53,13 @@ class Network:
                 except:
                     pass
 
+                if last == ".":
+                    break
+
                 d += last
 
                 try:
                     if last.count("}") == 1:
-                        d = d[:-1]
                         break
                 except:
                     pass
@@ -63,13 +76,13 @@ class Network:
     
     def disconnect(self, msg):
         print("[EXCEPTION] Disconnected from server: ", msg)
-
         self.client.close()
 
 
 n = Network("Tech With Tim")
-board = n.send({3:[]})
-print(board)
+time = n.send({9:[]})
+time = n.send({9:[]})
+    # print(time)
 
 
 # white 1
