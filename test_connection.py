@@ -46,6 +46,9 @@ class Network:
             while 1:
 
                 last = self.client.recv(1024).decode()
+                d += last
+                print(d)
+                
                 try:
                     if last == ".":
                         break
@@ -53,19 +56,20 @@ class Network:
                 except:
                     pass
 
-                if last == ".":
-                    break
-
-                d += last
+                
 
                 try:
                     if last.count("}") == 1:
+                        
                         break
                 except:
                     pass
 
-
-                
+            try:
+                if d[-1] == ".":
+                    d = d[:-1]
+            except:
+                pass
         
 
             keys = [key for key in data.keys()]
