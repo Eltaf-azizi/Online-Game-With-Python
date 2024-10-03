@@ -1,6 +1,7 @@
 """
 Represents the board object forthe game
 """
+import pygame
 
 class Board(object):
     ROWS = COLS = 720
@@ -16,17 +17,23 @@ class Board(object):
         8: (128, 0, 128)
     }
 
-    def __init__(self, x, y, width, height):
+    def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.width = width
-        self.height = height
+        self.WIDTH = 72
+        self.HEIGHT = 72
         self.compressedboard = []
         self.board = self.create_board()
 
 
     def create_board(self):
         return [[(255, 255, 255) for _ in range(self.COLS)] for _ in range(self.ROWS)]
+    
+
+    def translateboard(self):
+        for y, in enumerate(self.compressedboard):
+            for x, col in enumerate(self.compressedboard[y]):
+                self.board[y][x] = self.COLORS[col]
 
 
     def draw(self, win):
@@ -41,5 +48,5 @@ class Board(object):
         pass
 
     def clear(self):
-
+        pass
         
