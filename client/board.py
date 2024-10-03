@@ -22,7 +22,7 @@ class Board(object):
         self.y = y
         self.WIDTH = 72
         self.HEIGHT = 72
-        self.compressedboard = []
+        self.compressed_board = []
         self.board = self.create_board()
 
 
@@ -30,14 +30,14 @@ class Board(object):
         return [[(255, 255, 255) for _ in range(self.COLS)] for _ in range(self.ROWS)]
     
 
-    def translateboard(self):
-        for y, in enumerate(self.compressedboard):
-            for x, col in enumerate(self.compressedboard[y]):
+    def translate_board(self):
+        for y, _ in enumerate(self.compressed_board):
+            for x, col in enumerate(self.compressed_board[y]):
                 self.board[y][x] = self.COLORS[col]
 
 
     def draw(self, win):
-        win
+        pass
 
 
     def click(self, x, y):
