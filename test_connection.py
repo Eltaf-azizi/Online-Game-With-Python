@@ -9,7 +9,7 @@ class Network:
 
         self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.client.socketopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        self.server = "localhost"
+        self.server = "172.105.98.201"
         self.port = 5500
         self.addr = (self.server, self.port)
         self.name = name
@@ -50,20 +50,13 @@ class Network:
                 print(d)
                 
                 try:
-                    if last == ".":
+                    if d.count(".") == 1:
                         break
 
                 except:
                     pass
 
                 
-
-                try:
-                    if last.count("}") == 1:
-                        
-                        break
-                except:
-                    pass
 
             try:
                 if d[-1] == ".":
@@ -84,9 +77,14 @@ class Network:
 
 
 n = Network("Tech With Tim")
-time = n.send({9:[]})
-time = n.send({9:[]})
-    # print(time)
+
+print("send 1")
+time = n.send({3:[]})
+print(time)
+t.sleep(0.1)
+print("send 2")
+time = n.send({4:[]})
+print(time)
 
 
 # white 1
