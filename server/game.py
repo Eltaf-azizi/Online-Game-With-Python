@@ -72,6 +72,7 @@ class Game(object) :
                 self.player_draw_ind -= 1
             self.players.remove(player)
             self.round.player_left(player)
+            self.round.chat.update_chat(f"Player {player.get_name()} disconnected.")
             
 
         else:
@@ -97,7 +98,9 @@ class Game(object) :
         """
         if self.round:
             new_round = self.round.skip()
+            self.round.chat.update_chat(f"Player has votes to skip ({self.round.skips}/{len(self.players) -2})")
             if new_round:
+                self.round.chat.update_chat(f"Round has been skipped.")
                 self.round_ended()
                 return True
             return False
@@ -111,6 +114,7 @@ class Game(object) :
         :return: None
         """
 
+        self.round.chat.update_chat(f"Round {self.round_count} has ended.")
         self.start_new_round()
         self.board.clear()
 

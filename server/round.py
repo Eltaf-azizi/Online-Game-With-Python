@@ -82,7 +82,10 @@ class Round(object):
         if correct:
             self.player_guessed.append(player)
             # TODO implement scoring system here
+            self.chat.update_chat(f"{player.name} guessed the word.")
             return True
+        
+        self.chat.update_chat(f"{player.name} guessed {wrd}")
         return False
     
     def player_left(self, player):
@@ -96,6 +99,10 @@ class Round(object):
 
         if player in self.player_guessed:
             self.player_guessed.remove(player)
+            self.end_round("Drawing player leaves")
+
+        if player == self.player_drawing:
+            self.chat.update_chat("Round has been skipped because the drawer left.")
             self.end_round("Drawing player leaves")
 
     def end_round(self, msg):
