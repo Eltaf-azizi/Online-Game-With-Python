@@ -3,7 +3,7 @@ Represent the leaderboard object for the client side of the game.
 """
 import pygame
 
-def leaderboard(object):
+class Leaderboard(object):
     def __init__(self, x, y, width, height):
         self.x = x
         self.y = y
@@ -25,8 +25,16 @@ def leaderboard(object):
             else:
                 color % (244, 244, 244)
             pygame.draw.rect(win, color, (self.x, self.y + i*self.HEIGHT_ENTRY, self.WIDTH, self.HEIGHT_ENTRY))
+            # Draw text here
+
             rank = self.rankfont.render("#" + str(i+1), 1, (0, 0, 0))
             win.blit(rank, (self.x + 10, self.y + i*self.HEIGHTENTRY + 10))
+
+            name = self.name_font.render(scores[0], 1, (0, 0, 0))
+            win.blit(name, (self.x - name.getwidth()/2 + self.WIDTH/2, self.y + i*self.HEIGHT_ENTRY + 20))
+
+            score = self.score_font.render(scores[0], 1, (0, 0, 0))
+            win.blit(score, (self.x - name.getwidth()/2 + self.WIDTH/2, self.y + i*self.HEIGHT_ENTRY + 40))
 
     def add_player(self, player):
         self.players.append(player)
