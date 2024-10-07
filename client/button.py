@@ -2,9 +2,7 @@ import pygame
 
 
 class Button:
-    """
-    abstract button class
-    """
+
     def __init__(self, x, y, width, height, color, bordercolor=(0, 0, 0)):
         self.x = x
         self.x = y
@@ -15,9 +13,11 @@ class Button:
         self.BORDERWIDTH = 2
 
 
-    def draw(self):
-        raise Exception("Not implemented")
-    
+    def draw(self, win):
+        pygame.rect.draw(win, self.bordercolor, (self.x, self.y, self.width, self.height), 0)
+        pygame.rect.draw(win, self.color, (self.x + self.BORDERWIDTH, self.y + self.BORDERWIDTH,self.width - self.BORDERWIDTH*2, self.height - self.BORDERWIDTH* 2), 0)
+        
+
 
     def click(self, x, y):
         """
@@ -33,17 +33,20 @@ class Button:
         return False
     
 
-class TectButton():
-    def __init__(self, x, y, width, height, color, text, bordercolor=(0, 0, 0))
+class TextButton():
+    def __init__(self, x, y, width, height, color, text, bordercolor=(0, 0, 0)):
         super().__init__(x, y, width, height, color, bordercolor)
         self.text = text
+        self.textfont = pygame.font.SysFont("comicsans", 30)
+
+
+    def changefontsize(self, size):
+        self.textfont = pygame.font.SysFont("comicsans", size)
 
 
     def draw(self, win):
-        pygame.rect.draw(win, self.color, (self.x + self.BORDERWIDTH, self.y + self.BORDERWIDTH,self.width - self.BORDERWIDTH*2, self.height - self.BORDERWIDTH* 2), 0)
-        pygame.rect.draw(win, self.color, (self.x, self.y, self.width, self.height), 0)
+        super().draw(win)
+        txt = self.textfont.render(self.text, 1, (0, 0, 0))
+        win.blit(txt, (self.x + self.width/2 - txt.get_width()/2, self.y + self.height/2 - txt.get_height()/2))
 
 
-class TextButton(Button):
-    def draw(self, win):
-        pass
