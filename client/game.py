@@ -11,12 +11,15 @@ from player import Player
 class Game:
     def __init__(self):
         self.WIDTH = 1300
-        self.HEIGHT = 900
+        self.HEIGHT = 1000
         self.win = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
-        self.leaderboard = Leaderboard(100, 110)
+        self.leaderboard = Leaderboard(50, 110)
         self.board = Board(310, 110)
         self.top_bar = TopBar(10, 10, 1200, 100)
         self.top_bar.changeround(1)
+        self.player = [Player("Altaf"), Player("Noyan"), Player("Niamat"), Player("Kumail"), Player("Hassan")]
+        for player in self.players:
+            self.leaderboard.add_player(player)
 
 
     def draw(self):
@@ -31,7 +34,7 @@ class Game:
         run = True
         clock = pygame.time.Clock()
         while run:
-            clock.tick(70)
+            clock.tick(30)
             self.draw()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -44,5 +47,6 @@ class Game:
 
 
 if __name__ == "main":
+    pygame.font.init()
     g = Game()
     g.run()

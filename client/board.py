@@ -1,10 +1,13 @@
 """
 Represents the board object forthe game
 """
+
 import pygame
+import random
+
 
 class Board(object):
-    ROWS = COLS = 720
+    ROWS = COLS = 360
     COLORS = {
         0: (255, 255, 255),
         1: (0, 0, 0),
@@ -27,7 +30,7 @@ class Board(object):
 
 
     def create_board(self):
-        return [[(255, 255, 255) for _ in range(self.COLS)] for _ in range(self.ROWS)]
+        return [[(255, random.randint(0, 255), 255) for _ in range(self.COLS)] for _ in range(self.ROWS)]
     
 
     def translate_board(self):
@@ -37,9 +40,9 @@ class Board(object):
 
 
     def draw(self, win):
-        for y, _ in enumerate(self.compressed_board):
-            for x, col in enumerate(self.compressed_board[y]):
-                pygame.draw.rect(win, col, (self.x + x, self.y + y , y, 1, 1), 0)
+        for y, _ in enumerate(self.board):
+            for x, col in enumerate(self.board[y]):
+                pygame.draw.rect(win, col, (self.x + x*2, self.y + y *2, y, 2, 2), 0)
 
 
     def click(self, x, y):

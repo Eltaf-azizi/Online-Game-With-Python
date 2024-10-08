@@ -13,7 +13,7 @@ class TopBar(object):
         self.word = ""
         self.round = 1
         self.maxround = 8
-        self.roundfont = pygame.font.Sysfont("comicsans", 30)
+        self.roundfont = pygame.font.SysFont("comicsans", 30)
         self.BORDERTHICKNESS = 5
 
 
