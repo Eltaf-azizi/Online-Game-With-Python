@@ -13,8 +13,8 @@ class Game:
         self.WIDTH = 1300
         self.HEIGHT = 1000
         self.win = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
-        self.leaderboard = Leaderboard(50, 110)
-        self.board = Board(310, 110)
+        self.leaderboard = Leaderboard(50, 124)
+        self.board = Board(310, 124)
         self.top_bar = TopBar(10, 10, 1200, 100)
         self.top_bar.changeround(1)
         self.player = [Player("Altaf"), Player("Noyan"), Player("Niamat"), Player("Kumail"), Player("Hassan")]

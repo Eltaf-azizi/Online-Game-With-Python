@@ -27,6 +27,7 @@ class Board(object):
         self.HEIGHT = 72
         self.compressed_board = []
         self.board = self.create_board()
+        self.BORDERTHICKNESS = 4
 
 
     def create_board(self):
@@ -40,6 +41,7 @@ class Board(object):
 
 
     def draw(self, win):
+        pygame.draw.rect(win, (0, 0, 0), (self.x, self.y, self.WIDTH, self.HEIGHT), self.BORDERTHICKNESS)
         for y, _ in enumerate(self.board):
             for x, col in enumerate(self.board[y]):
                 pygame.draw.rect(win, col, (self.x + x*2, self.y + y *2, y, 2, 2), 0)
