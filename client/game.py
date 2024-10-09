@@ -14,10 +14,11 @@ class Game:
         self.HEIGHT = 1000
         self.win = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
         self.leaderboard = Leaderboard(50, 124)
-        self.board = Board(310, 124)
+        self.board = Board(304, 124)
         self.top_bar = TopBar(10, 10, 1200, 100)
         self.top_bar.changeround(1)
         self.player = [Player("Altaf"), Player("Noyan"), Player("Niamat"), Player("Kumail"), Player("Hassan")]
+        self.skipbutton = TextButton(87, 790, 124, 59, (255,255, 0), "Skip")
         for player in self.players:
             self.leaderboard.add_player(player)
 
@@ -27,7 +28,24 @@ class Game:
         self.leaderboard.draw(self.win)
         self.top_bar.draw(self.win)
         self.board.draw(self.win)
+        self.skipbutton.draw(self.win)
         pygame.display.update()
+
+
+
+
+    def check_clicks(self):
+        """
+        handles clicks on buttons and screen
+        :return: None
+        """
+
+        mouse = pygame.mouse.get_pos()
+        
+        # Check click on skip button
+
+        if self.skipbutton.click(*mouse):
+            print("Clicked skip button")
 
 
     def run(self):
@@ -40,6 +58,11 @@ class Game:
                 if event.type == pygame.QUIT:
                     run = False
                     break
+
+
+                if event.type == pygame.MOUSEBUTTONDOWN:
+
+                    self.check_clicks()
 
 
         pygame.quit()

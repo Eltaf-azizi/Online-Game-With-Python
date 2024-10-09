@@ -31,7 +31,7 @@ class Board(object):
 
 
     def create_board(self):
-        return [[(255, random.randint(0, 255), 255) for _ in range(self.COLS)] for _ in range(self.ROWS)]
+        return [[(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)) for _ in range(self.COLS)] for _ in range(self.ROWS)]
     
 
     def translate_board(self):
@@ -41,7 +41,8 @@ class Board(object):
 
 
     def draw(self, win):
-        pygame.draw.rect(win, (0, 0, 0), (self.x, self.y, self.WIDTH, self.HEIGHT), self.BORDERTHICKNESS)
+        pygame.draw.rect(win, (0, 0, 0), (self.x - self.BORDERTHICKNESS/2, self.y - self.BORDERTHICKNESS/2,
+        self.WIDTH + self.BORDERTHICKNESS, self.HEIGHT + self.BORDERTHICKNESS), self.BORDERTHICKNESS)
         for y, _ in enumerate(self.board):
             for x, col in enumerate(self.board[y]):
                 pygame.draw.rect(win, col, (self.x + x*2, self.y + y *2, y, 2, 2), 0)
