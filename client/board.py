@@ -45,7 +45,7 @@ class Board(object):
         self.WIDTH + self.BORDERTHICKNESS, self.HEIGHT + self.BORDERTHICKNESS), self.BORDERTHICKNESS)
         for y, _ in enumerate(self.board):
             for x, col in enumerate(self.board[y]):
-                pygame.draw.rect(win, col, (self.x + x*4, self.y + y *2, y, 4, 4), 0)
+                pygame.draw.rect(win, col, (self.x + x*8, self.y + y *8, y, 8, 8), 0)
 
 
     def click(self, x, y):
@@ -57,16 +57,27 @@ class Board(object):
         :return: (int, int) or None
         """
 
-        row = int((x - self.x)/4)
-        col = int((y - self.y)/4)
+        row = int((x - self.x)/8)
+        col = int((y - self.y)/8)
         if 0 <= row < self.ROWS and 0 <= col <= self.COLS:
             return (row, col)
         
         return None
 
 
-    def update(self, x, y, color):
-        self.board[y][x] = color 
+    def update(self, x, y, color, thickness=3):
+        neighs = [(x, y)] + self.getneighbour(x, y)
+
+        for x,y in list(neighs):
+            if 0<= x <= self.COLS and 0 <= y <= self.ROWS:
+                self.board[y][x] = color 
+
+
+    
+    def getneighbour(self, x, y):
+        return [ (x-1, y-1), (x, y-1), (x+1, y-1),
+                (x-1, y), (x+1, y),
+                (x-1, y+1), (x, y+1), (x+1, y+1)]
 
     def clear(self):
         self.board = self.create_board()
