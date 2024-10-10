@@ -48,6 +48,14 @@ class Game:
             print("Clicked skip button")
 
 
+        clickedboard = self.board.click(*mouse)
+        
+        print(clickedboard)
+
+        if clickedboard:
+            self.board.update(*clickedboard, (0, 0, 0))
+
+
     def run(self):
         run = True
         clock = pygame.time.Clock()
@@ -60,7 +68,7 @@ class Game:
                     break
 
 
-                if event.type == pygame.MOUSEBUTTONDOWN:
+                if pygame.mouse.get_pressed()[0]:
 
                     self.check_clicks()
 

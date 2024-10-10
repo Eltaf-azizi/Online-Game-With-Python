@@ -7,7 +7,7 @@ import random
 
 
 class Board(object):
-    ROWS = COLS = 360
+    ROWS = COLS = 180
     COLORS = {
         0: (255, 255, 255),
         1: (0, 0, 0),
@@ -31,7 +31,7 @@ class Board(object):
 
 
     def create_board(self):
-        return [[(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)) for _ in range(self.COLS)] for _ in range(self.ROWS)]
+        return [[(255, 255, 255) for _ in range(self.COLS)] for _ in range(self.ROWS)]
     
 
     def translate_board(self):
@@ -45,7 +45,7 @@ class Board(object):
         self.WIDTH + self.BORDERTHICKNESS, self.HEIGHT + self.BORDERTHICKNESS), self.BORDERTHICKNESS)
         for y, _ in enumerate(self.board):
             for x, col in enumerate(self.board[y]):
-                pygame.draw.rect(win, col, (self.x + x*2, self.y + y *2, y, 2, 2), 0)
+                pygame.draw.rect(win, col, (self.x + x*4, self.y + y *2, y, 4, 4), 0)
 
 
     def click(self, x, y):
@@ -57,8 +57,8 @@ class Board(object):
         :return: (int, int) or None
         """
 
-        row = int(x - self.x)
-        col = int(y - self.y)
+        row = int((x - self.x)/4)
+        col = int((y - self.y)/4)
         if 0 <= row < self.ROWS and 0 <= col <= self.COLS:
             return (row, col)
         
