@@ -6,6 +6,7 @@ from main_menu import MainMenu
 from tool_bar import ToolBar
 from leader_board import Leaderboard
 from player import Player
+from bottombar import BottomBar
 
 
 class Game:
@@ -19,7 +20,9 @@ class Game:
         self.top_bar.changeround(1)
         self.drawcolor = (0, 0, 0)
         self.player = [Player("Altaf"), Player("Noyan"), Player("Niamat"), Player("Kumail"), Player("Hassan")]
-        self.skipbutton = TextButton(87, 790, 124, 59, (255,255, 0), "Skip")
+        self.skipbutton = TextButton(87, 830, 124, 59, (255,255, 0), "Skip")
+        self.bottombar = BottomBar(304, 880, self)
+        self.drawcolor = (0, 0, 0)
         for player in self.players:
             self.leaderboard.add_player(player)
 
