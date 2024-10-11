@@ -17,6 +17,7 @@ class Game:
         self.board = Board(304, 124)
         self.top_bar = TopBar(10, 10, 1200, 100)
         self.top_bar.changeround(1)
+        self.drawcolor = (0, 0, 0)
         self.player = [Player("Altaf"), Player("Noyan"), Player("Niamat"), Player("Kumail"), Player("Hassan")]
         self.skipbutton = TextButton(87, 790, 124, 59, (255,255, 0), "Skip")
         for player in self.players:
@@ -53,7 +54,7 @@ class Game:
         print(clickedboard)
 
         if clickedboard:
-            self.board.update(*clickedboard, (0, 0, 0))
+            self.board.update(*clickedboard, self.drawcolor)
 
 
     def run(self):
