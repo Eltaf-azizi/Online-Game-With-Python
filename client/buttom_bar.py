@@ -33,8 +33,7 @@ class BottomBar:
                             Button(self.x + 80, self.y + 35, 30, 30, self.COLORS[5]),
                             Button(self.x + 20, self.y + 5, 30, 30, self.COLORS[6]),
                             Button(self.x + 50, self.y + 5, 30, 30, self.COLORS[7]),
-                            Button(self.x + 80, self.y + 5, 30, 30, self.COLORS[8])
-                            ]
+                            Button(self.x + 80, self.y + 5, 30, 30, self.COLORS[8])]
 
 
 

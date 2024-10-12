@@ -3,7 +3,6 @@ from button import Button, TextButton
 from board import Board
 from top_bar import TopBar
 from main_menu import MainMenu
-from tool_bar import ToolBar
 from leader_board import Leaderboard
 from player import Player
 from bottombar import BottomBar
