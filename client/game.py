@@ -87,7 +87,7 @@ class Game:
 
 
                     # converts to uppercase the key name
-                    keyname = keyname.upper()
+                    keyname = keyname.lower()
                     self.chat.type(keyname)
 
 

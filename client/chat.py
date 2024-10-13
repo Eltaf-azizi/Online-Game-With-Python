@@ -11,7 +11,7 @@ class Chat:
         self.WIDTH = 224
         self.HEIGHT = 800
         self.BORDERTHICKNESS = 5
-        self.content = ["HELLO" for _ in range(100)]
+        self.content = []
         self.typing = ""
         self.chatfont = pygame.font.SysFont("comicsans", 20)
         self.typefont = pygame.font.SysFont("comicsans", 30)
@@ -47,16 +47,21 @@ class Chat:
 
     def type(self, char):
 
-        if char == "BACKSPACE":
+        if char == "backspace":
              if len(self.typing) > 0:
                   self.typing = self.typing[:-1]
         
-        elif char == "SPACE":
+        elif char == "space":
              self.typing += " "
             
 
         elif len(char) == 1:
              self.typing += char
+
+
+
+        if len(self.typing) >= 24:
+            self.typing = self.typing[:24]
 
 
 
