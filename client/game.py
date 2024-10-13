@@ -6,6 +6,7 @@ from main_menu import MainMenu
 from leader_board import Leaderboard
 from player import Player
 from bottombar import BottomBar
+from chat import Chat
 
 
 class Game:
@@ -21,6 +22,7 @@ class Game:
         self.player = [Player("Altaf"), Player("Noyan"), Player("Niamat"), Player("Kumail"), Player("Hassan")]
         self.skipbutton = TextButton(87, 830, 124, 59, (255,255, 0), "Skip")
         self.bottombar = BottomBar(304, 880, self)
+        self.chat = Chat(1040, 124)
         self.drawcolor = (0, 0, 0)
         for player in self.players:
             self.leaderboard.add_player(player)
@@ -32,6 +34,7 @@ class Game:
         self.top_bar.draw(self.win)
         self.board.draw(self.win)
         self.skipbutton.draw(self.win)
+        self.chat.draw(self.win)
         pygame.display.update()
 
 
@@ -74,10 +77,21 @@ class Game:
                 if pygame.mouse.get_pressed()[0]:
 
                     self.check_clicks()
+                    self.bottombar.buttonevents()
+
+
+
+                if event.type == pygame.KEYDOWN:
+                    # gets the key name
+                    keyname = pygame.key.name(event.key)
+
+
+                    # converts to uppercase the key name
+                    keyname = keyname.upper()
+                    self.chat.type(keyname)
 
 
         pygame.quit()
-
 
 
 if __name__ == "main":

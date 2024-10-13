@@ -8,13 +8,14 @@ class Chat:
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.WIDTH = 240
+        self.WIDTH = 224
         self.HEIGHT = 800
         self.BORDERTHICKNESS = 5
-        self.content = []
+        self.content = ["HELLO" for _ in range(100)]
         self.typing = ""
-        self.chatfont = pygame.font.SysFont("comicsans", 17)
-        self.CHATGAP = 5
+        self.chatfont = pygame.font.SysFont("comicsans", 20)
+        self.typefont = pygame.font.SysFont("comicsans", 30)
+        self.CHATGAP = 20
 
 
     
@@ -24,30 +25,38 @@ class Chat:
 
     
     def draw(self, win):
+        pygame.draw.rect(win, (200, 200, 200), (self.x, self.y + self.HEIGHT - 40,self.WIDTH, 40))
+        pygame.draw.line(win, (0, 0, 0), (self.x, self.y + self.HEIGHT - 40), (self.x + self.WIDTH, self.y + self.HEIGHT - 40), self.BORDERTHICKNESS)
+
         pygame.draw.rect(win, (0, 0, 0), (self.x, self.y, self.WIDTH, self.HEIGHT), self.BORDERTHICKNESS)
 
-        while len(chat) * self.CHATGAP > self.HEIGHT - 100:
+        while len(self.content) * self.CHATGAP > self.HEIGHT - 60:
              
-             chat = chat[:-1]
+            self.content = self.content[:-1]
 
 
         for i, chat in enumerate(self.content):
                 txt = self.chatfont.render(chat, 1, (0, 0, 0))
-                win.blit(txt, (self.x + 5, self.y + i*self.CHATGAP))
+                win.blit(txt, (self.x + 8, 10 + self.y + i*self.CHATGAP))
+        
 
-        pygame.draw.rect(win, (220, 220, 220), (self.x, self.y + self.HEIGHT - 100,self.WIDTH, 100), self.BORDERTHICKNESS)
-
-        typechat = self.chatfont.render(self.typing, 1, (0, 0, 0))
-        win.blit(typechat, (self.x + 4, self.y + 49 - typechat.get_height()/2))
-
+        typechat = self.typefont.render(self.typing, 1, (0, 0, 0))
+        win.blit(typechat, (self.x + 4, self.y + self.HEIGHT - 17 - typechat.get_height()/2))
 
 
-    def type(self, char, delete):
 
-        if delete:
+    def type(self, char):
+
+        if char == "BACKSPACE":
              if len(self.typing) > 0:
                   self.typing = self.typing[:-1]
+        
+        elif char == "SPACE":
+             self.typing += " "
+            
 
-        else:
+        elif len(char) == 1:
              self.typing += char
+
+
 
