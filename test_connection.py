@@ -26,7 +26,7 @@ class Network:
             self.disconnect(e)
 
     
-    def str_str(self, data):
+    def send_str(self, data):
         try:
             self.client.connect(self.addr)
             self.client.sendall(self.name.encode())

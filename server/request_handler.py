@@ -41,8 +41,6 @@ class Server(object):
                 except Exception as e:
                     break
 
-
-                # player is not apart of game
                 keys = [int(key)for key in data.keys()]
                 send_msg = {int(key):[] for key in keys}
 
@@ -100,8 +98,7 @@ class Server(object):
                         
                         
                 send_msg = json.dumps(send_msg)
-                conn.sendall(send_msg+".".encode())
-
+                conn.sendall(send_msg + ".".encode())
             except Exception as e:
                 print(f"[EXCEPTION] {player.get_name()} disconnected:", e)
                 break

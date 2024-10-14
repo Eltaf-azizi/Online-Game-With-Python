@@ -3,6 +3,7 @@ import json
 import time as t
 
 
+
 class Network:
 
     def __init__ (self, name):
@@ -25,15 +26,6 @@ class Network:
             print(e)
             self.disconnect(e)
 
-    
-    def str_str(self, data):
-        try:
-            self.client.connect(self.addr)
-            self.client.sendall(self.name.encode())
-            return json.loads(self.recv(2028))
-        except Exception as e:
-            print(e)
-            self.disconnect(e)
     
     
 
