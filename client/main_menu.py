@@ -8,7 +8,7 @@ from network import Network
 
 
 class MainMenu:
-    
+    BG = (255, 255, 255)
 
     def __init__(self):
         self.WIDTH = 1300
@@ -17,20 +17,48 @@ class MainMenu:
         self.name = ""
         self.name_font = pygame.font.SysFont("comicsans", 80)
         self.title_font = pygame.font.SysFont("comicsans", 120)
+        self.enter_font = pygame.font.SysFont("comicsans", 60)
+
 
 
 
     def draw(self):
+        self.win.fill(self.BG)
+        title = self.title_font.render("Pictionary!", 1, (0, 0, 0))
+        self.win.blit(title, (self.WIDTH/2 - title.get_width()/2, 50))
 
-        self.win.fill()
+        name = self.name_font.render("Type a name: " + self.name,  1, (0, 0, 0))
+        self.win.blit(name, (100, 400))
+
+
+        if self.waiting:
+            enter = self.enter_font.render("In queue...", 1, (0, 0, 0))
+            self.win.blit.render(enter, (self.WIDTH/2 - title.get_width()/2, 800))
+
+        else:
+            enter = self.enter_font.render("Press enter to join a game...", 1, (0, 0, 0))
+            self.win.blit.render(enter, (self.WIDTH/2 - title.get_width()/2, 800))
+
+
+        pygame.display.update()
 
 
 
     def run(self):
-
         run = True
+        clock = pygame.time.Clock()
 
         while run:
+
+            clock.tick(30)
+            if self.waiting:
+                response = self.n.send({-1:[]})
+                print(response)
+                if response:
+                    break
+
+
+
             for event in pygame.event.get():
 
                 if event.type == pygame.QUIT:
@@ -42,6 +70,9 @@ class MainMenu:
                     if event.key == pygame.K_RETURN:
                         if len(self.name) > 1:
                             run = False
+                            self.waiting = True
+                            self.n = Network(self.name)
+
                     else:
                         # gets the key name
                         keyname = pygame.key.name(event.key)

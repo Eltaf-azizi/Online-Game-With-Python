@@ -12,7 +12,8 @@ from network import Network
 
 
 class Game:
-    def __init__(self, win):
+    def __init__(self, win, connection=None):
+        self.connection = connection
         self.win = win
         self.leaderboard = Leaderboard(50, 124)
         self.board = Board(304, 124)
