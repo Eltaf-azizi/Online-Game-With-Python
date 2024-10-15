@@ -4,6 +4,9 @@ Shows the main menu for the game, gets the user name before starting
 
 import pygame
 from network import Network
+from game import Game
+from player import Player
+
 
 
 
@@ -51,12 +54,19 @@ class MainMenu:
         while run:
 
             clock.tick(30)
+            self.draw()
             if self.waiting:
                 response = self.n.send({-1:[]})
                 print(response)
                 if response:
-                    break
 
+                    run = False
+                    g = Game(self.win, self.n)
+
+                    for player in response:
+                        p = Player(player)
+                        g.add_player(p)
+                    g.run()
 
 
             for event in pygame.event.get():
@@ -69,7 +79,6 @@ class MainMenu:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN:
                         if len(self.name) > 1:
-                            run = False
                             self.waiting = True
                             self.n = Network(self.name)
 
@@ -103,3 +112,9 @@ class MainMenu:
             if len(self.name) >= 20:
                 self.name = self.name[:20]
 
+
+if __name__ == "__main__":
+
+    pygame.font.init()
+    main = MainMenu()
+    main.run()

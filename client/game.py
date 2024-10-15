@@ -2,7 +2,6 @@ import pygame
 from button import Button, TextButton
 from board import Board
 from top_bar import TopBar
-from main_menu import MainMenu
 from leader_board import Leaderboard
 from player import Player
 from bottombar import BottomBar
@@ -13,6 +12,7 @@ from network import Network
 
 class Game:
     def __init__(self, win, connection=None):
+        pygame.font.init()
         self.connection = connection
         self.win = win
         self.leaderboard = Leaderboard(50, 124)
@@ -25,8 +25,13 @@ class Game:
         self.bottombar = BottomBar(304, 880, self)
         self.chat = Chat(1040, 124)
         self.drawcolor = (0, 0, 0)
-        for player in self.players:
-            self.leaderboard.add_player(player)
+
+        
+
+    def add_player(self, player):
+        self.players.append(player)
+        self.leaderboard.add_player(player)
+
 
 
     def draw(self):
@@ -83,19 +88,20 @@ class Game:
 
 
                 if event.type == pygame.KEYDOWN:
-                    # gets the key name
-                    keyname = pygame.key.name(event.key)
+                    if event.key == pygame.K_RETURN:
+                        self.chat.updatechat()
+                        self.connection.send({0:[self.chat.typing]})
+
+                    else:
+                        # gets the key name
+                        keyname = pygame.key.name(event.key)
 
 
-                    # converts to uppercase the key name
-                    keyname = keyname.lower()
-                    self.chat.type(keyname)
+                        # converts to uppercase the key name
+                        keyname = keyname.lower()
+                        self.chat.type(keyname)
 
 
         pygame.quit()
 
 
-if __name__ == "main":
-    pygame.font.init()
-    g = Game()
-    g.run()

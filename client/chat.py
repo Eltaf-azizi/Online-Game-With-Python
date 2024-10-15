@@ -19,8 +19,8 @@ class Chat:
 
 
     
-    def updatechat(self, msg):
-        self.content.append(msg)
+    def updatechat(self):
+        self.content.append(self.typing)
 
 
     
