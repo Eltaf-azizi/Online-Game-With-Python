@@ -166,7 +166,7 @@ class Server(object):
     def connection_thread(self):
 
         server = ""
-        port = 5500
+        port = 5556
 
 
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
