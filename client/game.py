@@ -11,6 +11,23 @@ from network import Network
 
 
 class Game:
+
+    BG = (255, 255, 255)
+    COLORS = {
+        (255, 255, 255): 0,
+        (0, 0, 0): 1,
+        (255, 0, 0): 2,
+        (0, 255, 0): 3,
+        (0, 0, 255): 4,
+        (255, 255,0): 5,
+        (255,140, 0): 6,
+        (165, 42, 42): 7,
+        (128, 0, 128):8
+    }
+
+
+
+
     def __init__(self, win, connection=None):
         pygame.font.init()
         self.connection = connection
@@ -61,11 +78,10 @@ class Game:
 
 
         clickedboard = self.board.click(*mouse)
-        
-        print(clickedboard)
 
         if clickedboard:
             self.board.update(*clickedboard, self.drawcolor)
+            self.connection.send({8:[*clickedboard, self.COLORS[tuple(self.drawcolor)]]})
 
 
     def run(self):
@@ -73,6 +89,17 @@ class Game:
         clock = pygame.time.Clock()
         while run:
             clock.tick(60)
+
+
+            try:
+                response = self.connection.send({3:[]})
+                self.board.compressed_board = response
+                self.board.translate_board()
+            except:
+                run = False
+                break
+
+
             self.draw()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -91,6 +118,7 @@ class Game:
                     if event.key == pygame.K_RETURN:
                         self.chat.updatechat()
                         self.connection.send({0:[self.chat.typing]})
+                        self.chat.typing = ""
 
                     else:
                         # gets the key name

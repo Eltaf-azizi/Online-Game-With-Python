@@ -3,7 +3,7 @@ Stores the state of the deawing board.
 """
 
 class Board(object):
-    ROWS = COLS = 720
+    ROWS = COLS = 90
     
     def __init__(self):
         """
