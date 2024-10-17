@@ -57,6 +57,7 @@ class BottomBar:
 
         if self.clearbutton.click(*mouse):
             self.game.board.clear()
+            self.connection.send({1:[]})
 
         
         if self.eraserbutton.click(*mouse):

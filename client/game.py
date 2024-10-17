@@ -75,6 +75,8 @@ class Game:
 
         if self.skipbutton.click(*mouse):
             print("Clicked skip button")
+            skips = self.connection.send({1:[]})
+            print(skips)
 
 
         clickedboard = self.board.click(*mouse)
@@ -92,9 +94,17 @@ class Game:
 
 
             try:
+
+                # get board
                 response = self.connection.send({3:[]})
                 self.board.compressed_board = response
                 self.board.translate_board()
+
+
+                # get time
+                response = self.connection.send({9:[]})
+                self.top_bar.time = response
+
             except:
                 run = False
                 break

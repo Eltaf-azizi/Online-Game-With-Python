@@ -91,9 +91,12 @@ class Server(object):
                             x, y, color = data['8'][:3]
                             player.game.update_board(x, y, color)
 
-                        elif key == 9: # get method time
+                        elif key == 9: # get round time
                             t = player.game.round.time
                             send_msg[9] = t
+
+                        elif key == 9: # clear board
+                            player.game.board.clear()
                             
                         
                         
