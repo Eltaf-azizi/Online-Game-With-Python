@@ -19,9 +19,8 @@ class Chat:
 
 
     
-    def updatechat(self):
-        self.content.append(self.typing)
-
+    def updatechat(self, content):
+        self.content = content
 
     
     def draw(self, win):

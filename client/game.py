@@ -76,7 +76,7 @@ class Game:
         if self.skipbutton.click(*mouse):
             print("Clicked skip button")
             skips = self.connection.send({1:[]})
-            print(skips)
+            print("Skips: ", skips)
 
 
         clickedboard = self.board.click(*mouse)
@@ -105,6 +105,26 @@ class Game:
                 response = self.connection.send({9:[]})
                 self.top_bar.time = response
 
+
+                # ge chat
+                response = self.connection.send({2:[]})
+                self.chat.updatechat(response)
+
+
+                # get round word
+                if not self.top_bar.word:
+                    self.top_bar.word = self.connection.send({6:[]})
+
+
+                # get player updates
+                response = self.connection.send({0:[]})
+                self.players = []
+
+                for player in response:
+                    p = Player(player)
+                    self.add_player(p)
+
+
             except:
                 run = False
                 break
@@ -126,7 +146,6 @@ class Game:
 
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN:
-                        self.chat.updatechat()
                         self.connection.send({0:[self.chat.typing]})
                         self.chat.typing = ""
 

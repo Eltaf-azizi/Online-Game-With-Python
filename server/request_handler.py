@@ -13,7 +13,7 @@ import json
 
 
 class Server(object):
-    PLAYER = 1
+    PLAYER = 2
     def init(self):
         self.connection_queue = []
         self.gameId = 0
@@ -35,7 +35,6 @@ class Server(object):
                 try:
                     data = conn.recv(1024)
                     data = json.loads(data.decode())
-                    print("[LOG] Recieved data:", data)
 
 
                 except Exception as e:
@@ -95,7 +94,7 @@ class Server(object):
                             t = player.game.round.time
                             send_msg[9] = t
 
-                        elif key == 9: # clear board
+                        elif key == 10: # clear board
                             player.game.board.clear()
                             
                         
