@@ -120,6 +120,7 @@ class Game:
                 response = self.connection.send({0:[]})
                 self.players = []
 
+
                 for player in response:
                     p = Player(player)
                     self.add_player(p)

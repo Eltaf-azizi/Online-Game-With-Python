@@ -67,16 +67,13 @@ class Game(object) :
         
         # todo check this
         if player in self.players:
-            playerind = self.player.index(player)
-            if playerind >= self.player_draw_ind:
-                self.player_draw_ind -= 1
-            self.players.remove(player)
-            self.round.player_left(player)
+            # self.players.remove(player)
+            # self.round.player_left(player)
             self.round.chat.update_chat(f"Player {player.get_name()} disconnected.")
             
 
         else:
-            raise Exception("Player not in game")
+            raise Exception("Player is not in game")
         
         if len(self.players) <= 2:
             self.end_game()

@@ -13,7 +13,7 @@ import json
 
 
 class Server(object):
-    PLAYER = 2
+    PLAYER = 4
     def init(self):
         self.connection_queue = []
         self.gameId = 0
@@ -106,8 +106,11 @@ class Server(object):
                 break
                 
 
+        
+        if player.game:
+            player.game.player_disconnected(player)
         print(F"[DISCONNECT] {player.name} DISCONNECTED")
-        # player.game.player_disconnected(player)
+
         conn.close()
         
 
@@ -126,7 +129,7 @@ class Server(object):
             game = Game(self.gameId, self.connection_queue[:])
             
 
-        for p in self.connection_queue:
+        for p in game.players:
             p.set_game(game)
 
 
