@@ -109,6 +109,13 @@ class Server(object):
         
         if player.game:
             player.game.player_disconnected(player)
+
+
+        
+        if player in self.connection_queue:
+            self.connection_queue.remove(player)
+
+
         print(F"[DISCONNECT] {player.name} DISCONNECTED")
 
         conn.close()
@@ -135,6 +142,7 @@ class Server(object):
 
         self.gameId +=1
         self.connection_queue = []
+        print(f"[GAME] Game {self.gameId - 1} started...")
         
 
 

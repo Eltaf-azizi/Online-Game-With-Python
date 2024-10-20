@@ -20,6 +20,7 @@ class Round(object):
         self.word = word
         self.player_drawing = player_drawing
         self.player_guessed = []
+        self.players_skipped = []
         self.skips = 0
         self.time = 74
         self.game = game
