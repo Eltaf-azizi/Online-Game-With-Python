@@ -15,7 +15,9 @@ class TopBar(object):
         self.maxround = 8
         self.roundfont = pygame.font.SysFont("comicsans", 30)
         self.BORDERTHICKNESS = 5
-        self.time = 78
+        self.time = 75
+        self.drawing =False
+
 
 
 
@@ -28,7 +30,13 @@ class TopBar(object):
         win.blit(txt, (self.x + 10, self.y + self.height/2 - txt.get_height()/2))
 
         # draw underscores
-        txt = self.roundfont.render(TopBar.underscoretext(self.word), 1, (0, 0, 0))
+        if self.drawing:
+            wrd = self.word
+
+        else:
+            wrd = TopBar.underscoretext(self.word)
+
+        txt = self.roundfont.render( wrd, 1, (0, 0, 0))
         win.blit(txt, (self.x + self.width/2 - txt.getwidth()/2, self.y + self.height/2 - txt.get_height()/2 + 10))
 
 

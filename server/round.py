@@ -28,13 +28,19 @@ class Round(object):
         self.chat = Chat(self)
         start_new_thread( self.time_thread, ())
 
-    def skip(self):
+    def skip(self, player):
         """
         Return true if round skipped threshold met
         :return: bool
         """
-        self.skip += 1
-        if self.skip > len(self.game.player) - 2:
+
+        if player not in self.players_skipped:
+            self.players_skipped.append(player)
+            self.skips += 1
+            self.chat.update_chat(f"Player has votes to skip ({self.skips}/{len(self.game.players) -2})")
+            
+
+        if self.skip >= len(self.game.player) - 2:
             return True
         
         return False

@@ -42,6 +42,7 @@ class Server(object):
 
                 keys = [int(key)for key in data.keys()]
                 send_msg = {int(key):[] for key in keys}
+                last_board = None
 
                 for key in keys:
                     if key == -1: # get game, return a list of players
@@ -60,7 +61,7 @@ class Server(object):
                             send_msg[0] = correct
 
                         elif key == 1: # skip
-                            skip = player.game.skip()
+                            skip = player.game.skip(player)
                             send_msg[1] = [skip]
 
                         elif key == 2: # get chat
@@ -68,7 +69,9 @@ class Server(object):
                             send_msg[2] = content
                         elif key == 3: # get board
                             brd = player.game.board.get_board()
-                            send_msg[3] = brd 
+                            if last_board != brd:
+                                last_board = brd
+                                send_msg[3] = brd 
                         
                         elif key == 4: # get score
                             scores = player.game.get_player_scores()
@@ -87,8 +90,9 @@ class Server(object):
                             send_msg[7] = skips
                         
                         elif key == 8: # update board
-                            x, y, color = data['8'][:3]
-                            player.game.update_board(x, y, color)
+                            if player.game.round.player_drawing == player:
+                                x, y, color = data['8'][:3]
+                                player.game.update_board(x, y, color)
 
                         elif key == 9: # get round time
                             t = player.game.round.time
@@ -96,6 +100,9 @@ class Server(object):
 
                         elif key == 10: # clear board
                             player.game.board.clear()
+
+                        elif key == 11:
+                            send_msg[11] = player.game.round.player_drawing == player
                             
                         
                         

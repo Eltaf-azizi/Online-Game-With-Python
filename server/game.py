@@ -94,8 +94,8 @@ class Game(object) :
         :return: None
         """
         if self.round:
-            new_round = self.round.skip()
-            self.round.chat.update_chat(f"Player has votes to skip ({self.round.skips}/{len(self.players) -2})")
+            new_round = self.round.skip(player)
+    
             if new_round:
                 self.round.chat.update_chat(f"Round has been skipped.")
                 self.round_ended()
