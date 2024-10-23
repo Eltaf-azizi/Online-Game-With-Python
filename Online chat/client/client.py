@@ -82,4 +82,4 @@ class Client:
 
 
     def disconnect(self):
-        self.send_message(bytes("{quit}", "utf8"))
+        self.send_message("{quit}")

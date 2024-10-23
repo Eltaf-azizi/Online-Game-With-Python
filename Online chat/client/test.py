@@ -1,57 +1,45 @@
-from socket import AF_INET, socket, SOCK_STREAM
-from threading import Thread
+from client import Client
 import time
-
-
-# GLOBAL CONSTANTS
-HOST = "localhost"
-PORT = 5500
-ADDR = (HOST, PORT)
-BUFSIZ = 512
-
-
-# GOLBAL VARIABLES
-messages = []
-client_socket = socket(AF_INET, SOCK_STREAM)
-client_socket.connect(ADDR)
+from threading import Thread
 
 
 
-def receive_messages():
-    """
-    receive messages from the server
-    :return: None
-    """
-    while True:
-        try:
-            msg = client_socket.recv(BUFSIZ).decode()
-            messages.append(msg)
+
+c1 = Client("tim")
+c2 = Client("name")
+
+
+
+def update_messages():
+    msgs = []
+    run = True
+    while run:
+        time.sleep(0.1)
+        new_messages = c1.get_messages()
+        msgs.extend(new_messages)
+        for msg in new_messages:
             print(msg)
-            
-        except Exception as e:
-            print("[EXCEPTION]", e)
-            break
+            if msg == "{quit}":
+                run = False
+                break
 
 
 
-def send_message(msg):
-    """
-    send messages to server
-    :param msg: str
-    :return: None
-    """
-    client_socket.send(bytes(msg, "utf8"))
-    if msg == "{quit}":
-        client_socket.close()
-    
+Thread(target=update_messages).start()
 
 
-receive_thread = Thread(target=receive_messages)
-receive_thread.start()
+c1.send_message("hello")
+time.sleep(5)
 
+c2.send_message("hello")
+time.sleep(5)
 
-send_message("Joe")
-time.sleep(10)
-send_message("hello")
+c1.send_message("what's up")
+time.sleep(5)
+
+c2.send_message("Nothing much")
+time.sleep(5)
+
+c1.disconnect()
 time.sleep(2)
-send_message("{quit}")
+c2.disconnect()
