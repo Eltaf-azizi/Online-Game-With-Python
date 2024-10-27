@@ -6,12 +6,11 @@ app.secret_key = "hellomynameisEltafandyouwon'tguessthis"
 
 
 
-"""
+
 @app.route("/login")
 
 def login():
     return render_template("login.html")
-    """
 
 
 
@@ -36,8 +35,11 @@ def home():
     return render_template("index.html")
 
 
+app.route("/run")
+
 def run():
     print("clicked")
+    return "None"
 
 
 

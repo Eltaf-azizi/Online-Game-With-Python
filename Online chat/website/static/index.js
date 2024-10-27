@@ -2,10 +2,10 @@ $(function() {
 
     $('a#test'.bind('click', function() {
 
-        $.getJSON('/background_process_test',
+        $.getJSON('/run',
             function(data) {
                 
-                //do nothing
+                console.log("test");
             });
             return false;
     }));
