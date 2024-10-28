@@ -14,7 +14,7 @@ app.secret_key = "hellomynameisEltafandyouwon'tguessthis"
 
 def login():
     if request.method == "POST":
-        session[NAME_KEY] = request.form["name"]
+        session[NAME_KEY] = request.form["inputName"]
         return redirect(url_for("name"))
 
     return render_template("login.html")
