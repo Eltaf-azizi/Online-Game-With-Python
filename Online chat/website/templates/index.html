@@ -3,13 +3,15 @@
 {% block title %} Home {% endblock %}
 {% block content %}
 
-{% if login %}
-{% block messageGreen %}{{session["name"]}} logged in!{% endblock %}
-{% endif %}
-<h1>TEST</h1>
-<form>
-    <button id=test type="button" class="btn btn-primary btn-lg">Large button</button>
-</form>
+
+<div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Message" aria-label="Message" id="msg">
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="button">Button</button>
+    </div>
+</div>
+
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
 {% endblock %}

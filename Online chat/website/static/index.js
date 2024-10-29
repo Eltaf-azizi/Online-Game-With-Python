@@ -1,11 +1,13 @@
 $(function() {
 
     $('a#test'.bind('click', function() {
+        var value = document.getElementById("msg").value
 
         $.getJSON('/run',
+            {val:value},
             function(data) {
                 
-                console.log("test");
+                
             });
             return false;
     }));

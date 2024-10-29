@@ -17,7 +17,7 @@ def login():
         session[NAME_KEY] = request.form["inputName"]
         return redirect(url_for("name"))
 
-    return render_template("login.html", {"session":"session"})
+    return render_template("login.html", **{"session":"session"})
 
 
 
@@ -32,14 +32,12 @@ def logout():
 app.route("/")
 app.route("/home")
 
-
-
 def home():
     if NAME_KEY not in session:
         return redirect(url_for("login"))
 
 
-    return render_template("index.html", {"login":True, "session":session})
+    return render_template("index.html", **{"login":True, "session":session})
 
 
 app.route("/run")
