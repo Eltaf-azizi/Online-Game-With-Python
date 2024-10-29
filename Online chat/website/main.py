@@ -17,7 +17,7 @@ def login():
         session[NAME_KEY] = request.form["inputName"]
         return redirect(url_for("name"))
 
-    return render_template("login.html")
+    return render_template("login.html", {"session":"session"})
 
 
 
@@ -39,7 +39,7 @@ def home():
         return redirect(url_for("login"))
 
 
-    return render_template("index.html")
+    return render_template("index.html", {"login":True, "session":session})
 
 
 app.route("/run")
