@@ -41,8 +41,8 @@ def home():
 
 
 app.route("/run")
-
-def run():
+def run(url=None):
+    print(url)
     print("clicked")
     return "None"
 

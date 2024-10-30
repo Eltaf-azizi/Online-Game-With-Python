@@ -1,12 +1,11 @@
 $(function() {
 
-    $('a#test'.bind('click', function() {
+    $('#sendBtn'.bind('click', function() {
         var value = document.getElementById("msg").value
-
-        $.getJSON('/run',
+        console.log(value)
+        $.getJSON('/run', 
             {val:value},
             function(data) {
-                
                 
             });
             return false;
