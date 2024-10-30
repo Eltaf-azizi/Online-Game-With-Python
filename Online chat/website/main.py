@@ -3,6 +3,7 @@ from client import Client
 
 
 NAME_KEY = 'name'
+client = None
 
 app = Flask(__name__)
 app.secret_key = "hellomynameisEltafandyouwon'tguessthis"
@@ -33,18 +34,28 @@ app.route("/")
 app.route("/home")
 
 def home():
+    global client
+
     if NAME_KEY not in session:
         return redirect(url_for("login"))
 
 
+    client = Client(session[NAME_KEY])
     return render_template("index.html", **{"login":True, "session":session})
 
 
-app.route("/run")
+app.route("/run", methods=["GET"])
 def run(url=None):
-    print(url)
-    print("clicked")
-    return "None"
+    global client
+
+    msg = request.args.get("val")
+
+    if client != None:
+        client.send_message(msg)
+
+    session["client"].send_message(msg)
+
+    return "none"
 
 
 
