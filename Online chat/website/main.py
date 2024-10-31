@@ -100,13 +100,14 @@ def update_messages():
     updates the local list of messages
     :return: None
     """
-    msgs = []
+
+    global messages
     run = True
     while run:
         time.sleep(0.1) # update every 1/10 of a second
         if not client: continue
         new_messages = client.get_messages() # get any messages from client
-        msgs.extend(new_messages) # add to local list of messages
+        messages.extend(new_messages) # add to local list of messages
 
 
         for msg in new_messages: # display new messages
