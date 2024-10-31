@@ -1,5 +1,7 @@
-from flask import Flask, render_template, url_for, redirect, session, request
+from flask import Flask, render_template, url_for, redirect, session, request, jsonify
 from client import Client
+from threading import Thread
+import time
 
 
 NAME_KEY = 'name'
@@ -88,5 +90,32 @@ def send_message(url=None):
 
 
 
+@app.route("/get_messages")
+def get_message():
+    return jsonify({"messages": messages})
+
+
+def update_messages():
+    """
+    updates the local list of messages
+    :return: None
+    """
+    msgs = []
+    run = True
+    while run:
+        time.sleep(0.1) # update every 1/10 of a second
+        if not client: continue
+        new_messages = client.get_messages() # get any messages from client
+        msgs.extend(new_messages) # add to local list of messages
+
+
+        for msg in new_messages: # display new messages
+            if msg == "{quit}":
+                run = False
+                break
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)
+    Thread(target=update_messages).start()
