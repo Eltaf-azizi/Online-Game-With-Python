@@ -1,7 +1,11 @@
 $(function() {
 
     $('#sendBtn'.bind('click', function() {
-        var value = document.getElementById("msg").value
+
+        var msg = document.getElementById("msg")
+        var value = msg.value
+        msg.value = ""
+
         $.getJSON('/send_message', 
             {val:value},
             function(data) {
@@ -24,11 +28,11 @@ function update() {
             return response.text();
 
         }).then(function (text){
-            console.log('GET response text:');
-            console.log(text); // Print the greeting as text
+            console.log("run");
+            document.getElementById("test").innerText = response; // Print the greeting as text
 
         })
 
         return false;
-}
+    }
 
