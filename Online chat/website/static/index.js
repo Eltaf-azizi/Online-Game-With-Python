@@ -16,6 +16,9 @@ $(function() {
 });
 
 window.addEventListener("load", function(){
+    
+    var test = document.getElementById("test")
+    console.log(test.innerHTML)
     var update_loop = this.setInterval(update, 100);
     update()
 })
@@ -24,15 +27,11 @@ function update() {
 
     fetch('/get_messages')
 
-        .then(function (response) {
-            return response.text();
-
-        }).then(function (text){
-            console.log("run");
-            document.getElementById("test").innerText = response; // Print the greeting as text
+        .then(function (text){
+            document.getElementById("test").innerHTML = response; // Print the greeting as text
 
         })
 
-        return false;
-    }
+    return false;
+    };
 
