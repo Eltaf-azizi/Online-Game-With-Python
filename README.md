@@ -11,3 +11,13 @@ This project is a real-time multiplayer game created with Python and Pygame, all
  - Multiplayer gameplay using socket connections
  - Real-time interactions and smooth gameplay
  - Basic Pygame interface for user engagement
+
+Project 2: Online Chat Application
+Overview
+This online chat application uses Flask for the front end and a Python socket server for managing real-time communication. Initially developed in a live coding session, this project demonstrates basic chat functionalities with the potential for additional features.
+
+Features
+
+Real-time messaging between users
+Simple Flask-based front end
+Basic user interface for easy interactions
