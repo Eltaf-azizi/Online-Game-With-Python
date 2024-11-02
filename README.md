@@ -18,6 +18,6 @@ This online chat application uses Flask for the front end and a Python socket se
 
 ### Features
 
-Real-time messaging between users
-Simple Flask-based front end
-Basic user interface for easy interactions
+ - Real-time messaging between users
+ - Simple Flask-based front end
+ - Basic user interface for easy interactions
