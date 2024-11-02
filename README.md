@@ -21,3 +21,9 @@ This online chat application uses Flask for the front end and a Python socket se
  - Real-time messaging between users
  - Simple Flask-based front end
  - Basic user interface for easy interactions
+
+## Technologies Used
+ - **Python:** Primary programming language
+ - **Pygame:** Game development for the multiplayer game
+ - **Flask:** Web framework for the chat application
+ - **Sockets:** Real-time communication in both projects
