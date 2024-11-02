@@ -28,10 +28,13 @@ function update() {
             return response.json();
         })
         .then(function (text){
+            var messages = "";
 
             for (value of text["messages"]){
-                document.getElementById("test").textContent = text;
+                messages = messages + value + "<br >";
+                
             }
+            document.getElementById("text").innerHTML = messages
         });
     };
 
