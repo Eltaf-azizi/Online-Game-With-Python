@@ -1,0 +1,2 @@
+class peice:
+    pass
