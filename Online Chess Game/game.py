@@ -2,7 +2,7 @@ import pygame
 import os
 
 
-board = pygame.image.load(os.path.join("image", "board_alt.png"))
+board = pygame.transform.scale2x(pygame.image.load(os.path.join("image", "board_alt.png")))
 
 
 b_bishop = pygame.image.load(os.path.join("image", "black_bishop.png"))
@@ -38,7 +38,10 @@ for img in w:
 
 
 
-def redraw_gamewindow():
+def redraw_gameWindow():
+    global win
+    win.blit(board, (0, 0))
+
     pygame.display.update()
 
 
@@ -46,13 +49,17 @@ def redraw_gamewindow():
 
 def main():
 
+    clock = pygame.time.Clock()
     run = True
     while run:
+        clock.tick(10)
 
-        redraw_gamewindow()
+        redraw_gameWindow()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                run = False
+                quit()
                 pygame.quit()
 
             if event.type == pygame.MOUSEMOTION:
@@ -66,3 +73,4 @@ width = 500
 height = 500
 win = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Chess Game")
+main()
