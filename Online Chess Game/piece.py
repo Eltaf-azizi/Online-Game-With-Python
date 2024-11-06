@@ -42,6 +42,9 @@ for img in w:
 
 class Piece:
     img = -1
+    rect = (113, 113, 525, 525)
+    startX = rect[0]
+    startY = rect[1]
 
     def __init__(self, row, col, color):
         self.row = row
@@ -62,8 +65,18 @@ class Piece:
     
 
 
-    def draw(self):
-        pass
+    def draw(self, win):
+                
+        if self.color == "w":
+            drawThis = W[self.img]
+        
+        else:
+            drawThis = B[self.img]
+
+        X = self.startX = (self.col * self.rect[2]/8)
+        Y = self.startY = (self.row * self.rect[2]/8)
+
+        win.blit(drawThis, (X, Y))
 
 
 

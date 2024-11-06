@@ -1,46 +1,21 @@
 import pygame
 import os
+from piece import Bishop
 
 
-board = pygame.transform.scale2x(pygame.image.load(os.path.join("image", "board_alt.png")))
-
-
-b_bishop = pygame.image.load(os.path.join("image", "black_bishop.png"))
-b_king = pygame.image.load(os.path.join("image", "black_king.png"))
-b_knight = pygame.image.load(os.path.join("image", "black_knight.png"))
-b_pawn = pygame.image.load(os.path.join("image", "black_pawn.png"))
-b_queen = pygame.image.load(os.path.join("image", "black_queen.png"))
-b_rook = pygame.image.load(os.path.join("image", "black_rook.png"))
-
-
-
-w_bishop = pygame.image.load(os.path.join("image", "white_bishop.png"))
-w_king = pygame.image.load(os.path.join("image", "white_king.png"))
-w_knight = pygame.image.load(os.path.join("image", "white_knight.png"))
-w_pawn = pygame.image.load(os.path.join("image", "white_pawn.png"))
-w_queen = pygame.image.load(os.path.join("image", "white_queen.png"))
-w_rook = pygame.image.load(os.path.join("image", "white_rook.png"))
-
-
-b = [b_bishop, b_king, b_knight, b_pawn, b_queen, b_rook]
-w = [w_bishop, w_king, w_knight, w_pawn, w_queen, w_rook]
-
-B = []
-W = []
-
-
-for img in b:
-    B.append(pygame.transform.scale2x(img))
-
-
-for img in w:
-    W.append(pygame.transform.scale2x(img))
+board = pygame.transform.scale(pygame.image.load(os.path.join("image", "board_alt.png")), (750, 750))
+rect = (113, 113, 525, 525)
 
 
 
 def redraw_gameWindow():
     global win
+
     win.blit(board, (0, 0))
+
+    b = Bishop(1, 1, "w")
+    b.draw(win)
+    
 
     pygame.display.update()
 
@@ -69,8 +44,8 @@ def main():
                 pass
 
 
-width = 500
-height = 500
+width = 750
+height = 750
 win = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Chess Game")
 main()
