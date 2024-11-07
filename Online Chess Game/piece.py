@@ -30,11 +30,11 @@ W = []
 
 
 for img in b:
-    B.append(pygame.transform.scale2x(img))
+    B.append(pygame.transform.scale(img, (65, 65)))
 
 
 for img in w:
-    W.append(pygame.transform.scale2x(img))
+    W.append(pygame.transform.scale(img, (65, 65)))
 
 
 
@@ -73,10 +73,10 @@ class Piece:
         else:
             drawThis = B[self.img]
 
-        X = self.startX = (self.col * self.rect[2]/8)
-        Y = self.startY = (self.row * self.rect[2]/8)
+        x = self.startX = (self.col * self.rect[2]/8)
+        y = self.startY = (self.row * self.rect[2]/8)
 
-        win.blit(drawThis, (X, Y))
+        win.blit(drawThis, (x, y))
 
 
 

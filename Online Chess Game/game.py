@@ -1,6 +1,7 @@
 import pygame
 import os
 from piece import Bishop
+from board import Board
 
 
 board = pygame.transform.scale(pygame.image.load(os.path.join("image", "board_alt.png")), (750, 750))
@@ -23,6 +24,7 @@ def redraw_gameWindow():
 
 
 def main():
+    board = Board(8, 8)
 
     clock = pygame.time.Clock()
     run = True
