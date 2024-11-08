@@ -18,21 +18,18 @@ This project is a real-time multiplayer game created with Python and Pygame, all
 
      git clone <your-repo-link>
     cd <project-folder>
-Install dependencies: Ensure you have Python and pip installed, then install Pygame:
+    
+### 2. Install dependencies: Ensure you have Python and pip installed, then install Pygame:
 
-bash
-Copy code
-pip install pygame
-Run the game server:
+    pip install pygame
+    Run the game server:
 
-bash
-Copy code
-python server.py
-Start the game client: In a new terminal, run:
+### 3. run the game server
+    python server.py
+    
+### 4. Start the game client: In a new terminal, run:
 
-bash
-Copy code
-python client.py
+    python client.py
 
 ## Online Chat Application
 ### Overview
