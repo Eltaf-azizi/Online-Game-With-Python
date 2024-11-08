@@ -12,6 +12,28 @@ This project is a real-time multiplayer game created with Python and Pygame, all
  - Real-time interactions and smooth gameplay
  - Basic Pygame interface for user engagement
 
+## Getting Started
+
+### 1. Clone the repository:
+
+     git clone <your-repo-link>
+    cd <project-folder>
+Install dependencies: Ensure you have Python and pip installed, then install Pygame:
+
+bash
+Copy code
+pip install pygame
+Run the game server:
+
+bash
+Copy code
+python server.py
+Start the game client: In a new terminal, run:
+
+bash
+Copy code
+python client.py
+
 ## Online Chat Application
 ### Overview
 This online chat application uses Flask for the front end and a Python socket server for managing real-time communication. Initially developed in a live coding session, this project demonstrates basic chat functionalities with the potential for additional features.
