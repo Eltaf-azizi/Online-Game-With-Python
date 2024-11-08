@@ -13,9 +13,9 @@ def redraw_gameWindow():
     global win
 
     win.blit(board, (0, 0))
+    bo = Board(8, 8)
 
-    b = Bishop(1, 1, "w")
-    b.draw(win)
+    bo.draw(win)
     
 
     pygame.display.update()
@@ -24,7 +24,6 @@ def redraw_gameWindow():
 
 
 def main():
-    board = Board(8, 8)
 
     clock = pygame.time.Clock()
     run = True

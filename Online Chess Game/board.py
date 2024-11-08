@@ -15,8 +15,8 @@ class Board:
         self.cols = cols
 
 
-        self.board = [[] for _ in range(rows)]
-        print(self.board)
+        self.board = [[0 for x in range(8)] for _ in range(rows)]
+    
 
 
         self.board[0][0] = Bishop(0, 0, "b")
@@ -52,3 +52,13 @@ class Board:
         self.board[6][3] = Pawn(0, 3, "w")
         self.board[6][4] = Pawn(0, 4, "w")
         self.board[6][5] = Pawn(0, 5, "w")
+        self.board[6][7]
+        print(self.board)
+
+
+
+        def draw(self, win):
+            for i in range(self.rows):
+                for j in range(self.cols):
+                    if self.board[i][j] != 0:
+                        self.board[i][j].draw(win)
