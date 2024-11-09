@@ -74,7 +74,12 @@ class Piece:
             drawThis = B[self.img]
 
         x = 5 + round(self.startX + (self.col * self.rect[2]/8))
-        y = 5 + round(self.startY + (self.row * self.rect[2]/8))
+        y = 5 + round(self.startY + (self.row * self.rect[3]/8))
+
+
+        if self.selected:
+            pygame.draw.rect(win, (255, 0, 0), (x, y, 55, 55), 2)
+            
 
         win.blit(drawThis, (x, y))
 

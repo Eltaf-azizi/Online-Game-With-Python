@@ -10,11 +10,10 @@ rect = (113, 113, 525, 525)
 
 
 def redraw_gameWindow():
-    global win
+    global win, bo
 
     win.blit(board, (0, 0))
-    bo = Board(8, 8)
-
+   
     bo.draw(win)
     
 
@@ -33,17 +32,19 @@ def click(pos):
             
             divX = x - rect[0]
             divY = y - rect[0]
-            i = divX / rect[2]
-            j = divY / rect[3]
-            print(i, j)
+            i = int(divX / (rect[2]/8))
+            j = int(divY / (rect[3]/8))
+            return i, j
 
 
 
 
 def main():
-
+    global bo
+    bo = Board(8, 8)
     clock = pygame.time.Clock()
     run = True
+
     while run:
         clock.tick(10)
 
@@ -59,7 +60,9 @@ def main():
                 pass
 
             if event.type == pygame.MOUSEBUTTONDOWN:
-                pass
+                pos = pygame.mouse.get_pos()
+                i, j = click(pos)
+                bo.board[j][i].selected = True
 
 
 width = 750
