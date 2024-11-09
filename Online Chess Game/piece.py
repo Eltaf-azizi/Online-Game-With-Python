@@ -73,8 +73,8 @@ class Piece:
         else:
             drawThis = B[self.img]
 
-        x = self.startX = (self.col * self.rect[2]/8)
-        y = self.startY = (self.row * self.rect[2]/8)
+        x = 5 + round(self.startX + (self.col * self.rect[2]/8))
+        y = 5 + round(self.startY + (self.row * self.rect[2]/8))
 
         win.blit(drawThis, (x, y))
 

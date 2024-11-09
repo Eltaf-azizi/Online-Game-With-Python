@@ -21,6 +21,23 @@ def redraw_gameWindow():
     pygame.display.update()
 
 
+def click(pos):
+    """
+    :return: pos (x, y) in range 0-7 0-7
+    """
+    x = pos[0]
+    y = pos[1]
+
+    if rect[0] < x < rect[0] + rect[2]:
+        if rect[1] < y < rect[1] + rect[3]:
+            
+            divX = x - rect[0]
+            divY = y - rect[0]
+            i = divX / rect[2]
+            j = divY / rect[3]
+            print(i, j)
+
+
 
 
 def main():
