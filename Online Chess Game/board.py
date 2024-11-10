@@ -64,7 +64,20 @@ class Board:
 
 
         def draw(self, win):
+
             for i in range(self.rows):
                 for j in range(self.cols):
                     if self.board[i][j] != 0:
                         self.board[i][j].draw(win)
+
+
+        
+
+        def select(self, col, row):
+
+            for i in range(self.rows):
+                for j in range(self.cols):
+                    if self.board[i][j] != 0:
+                        self.board[i][j].selected = False
+
+            self.board[row][col].selected = True
