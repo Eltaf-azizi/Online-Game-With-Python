@@ -100,9 +100,23 @@ class Knight(Piece):
 class Pawn(Piece):
     img = 3
 
+    def __init__(self, row, col, color):
+        super().__init__(row, col, color)
+        self.first = True
+        self.queen = False
+
+
+    def move(self, board):
+        i = self.row
+        j = self.col
+
 
 class Queen(Piece):
     img = 4
+
+
+    def move(self, board):
+        pass
 
 
 class Rook(Piece):

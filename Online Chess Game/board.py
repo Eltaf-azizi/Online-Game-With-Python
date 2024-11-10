@@ -80,4 +80,5 @@ class Board:
                     if self.board[i][j] != 0:
                         self.board[i][j].selected = False
 
-            self.board[row][col].selected = True
+            if self.board[row][col] != 0:
+                self.board[row][col].selected = True
