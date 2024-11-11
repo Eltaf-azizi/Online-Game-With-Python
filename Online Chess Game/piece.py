@@ -93,6 +93,14 @@ class King(Piece):
     img = 1
 
 
+
+    def valid_moves(self):
+        i = self.row
+        j = self.col
+
+        moves = []
+
+
 class Knight(Piece):
     img = 2
 
@@ -104,10 +112,33 @@ class Knight(Piece):
 
         moves = []
 
-        if i < 7:
-            p = board[i+1][j]
+        # DOWN LEFT
+        if i < 6 and j > 0:
+            p = board[i + 2][j-1]
             if p == 0:
-                moves.append((j, i+1))
+                moves.append((j-1, i + 2))
+
+
+        # UP LEFT
+        if i > 1 and j > 0:
+            p = board[i - 2][j-1]
+            if p == 0:
+                moves.append((j-1, i - 2))
+
+
+        # DOWN RIGHT
+        if i < 6 and j > 7:
+            p = board[i + 2][j+1]
+            if p == 0:
+                moves.append((j + 1, i + 2))
+
+
+        
+        # UP RIGHT
+        if i > 1 and j < 7:
+            p = board[i - 2][j+1]
+            if p == 0:
+                moves.append((j + 1, i - 2))
 
         return moves
 
