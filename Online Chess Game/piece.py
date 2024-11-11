@@ -92,13 +92,43 @@ class Bishop(Piece):
 class King(Piece):
     img = 1
 
-
-
     def valid_moves(self):
         i = self.row
         j = self.col
 
         moves = []
+
+
+        if i > 0:
+
+        # TOP LEFT
+            if j > 0:
+                moves.append((j - 1, i - 1))
+
+
+        # TOP MIDDLE
+            moves.append((j, i - 1))
+
+
+        # TOP RIGHT
+            if j < 7:
+                moves.append((j + 1, i - 1))
+
+        
+        if i < 7:
+
+        # BOTTOM LEFT
+            if j > 0:
+                moves.append((j -1, i + 1))
+
+
+        # BOTTOM MIDDLE
+            moves.append((j, i + 1))
+
+
+        # BOTTOM RIGHT
+            if j < 7:
+                moves.append((j + 1, i + 1))
 
 
 class Knight(Piece):
