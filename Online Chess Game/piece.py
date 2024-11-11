@@ -54,7 +54,7 @@ class Piece:
 
 
     
-    def move(self):
+    def valid_moves(self):
         pass
 
 
@@ -96,6 +96,23 @@ class King(Piece):
 class Knight(Piece):
     img = 2
 
+    def valid_moves(self, board):
+
+        i = self.row
+        j = self.col
+
+
+        moves = []
+
+        if i < 7:
+            p = board[i+1][j]
+            if p == 0:
+                moves.append((j, i+1))
+
+        return moves
+
+
+
 
 class Pawn(Piece):
     img = 3
@@ -106,12 +123,32 @@ class Pawn(Piece):
         self.queen = False
 
 
-    def move(self, board):
+    def valid_moves(self, board):
+        
         i = self.row
         j = self.col
 
 
+        moves = []
+        if self.first:
+            if i < 6:
+                p = board[i+2][j]
+                if p == 0:
+                    moves.append((j, i+2))
+
+
+            if i < 7:
+                p = board[i+1][j]
+                if p == 0:
+                    moves.append((j, i+1))
+
+            return moves
+
+
+
+
 class Queen(Piece):
+
     img = 4
 
 
