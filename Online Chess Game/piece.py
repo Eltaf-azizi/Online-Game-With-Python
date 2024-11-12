@@ -131,6 +131,19 @@ class King(Piece):
                 moves.append((j + 1, i + 1))
 
 
+        # MIDDLE LEFT
+        if j > 0:
+            moves.append((j - 1, i))
+
+
+        # MIDDLE RIGHT
+        if j < 7:
+            moves.append((j + 1, i))
+
+
+        return moves
+
+
 class Knight(Piece):
     img = 2
 
@@ -219,3 +232,46 @@ class Queen(Piece):
 
 class Rook(Piece):
     img = 5
+
+
+
+    def valid_moves(self, board):
+
+        i = self.row
+        j = self.col
+
+        moves = []
+
+
+        # UP
+        for x in range(i, -1, -1):
+            p = board[i][j]
+            if p == 0:
+                moves.append((j, x))
+                break
+
+
+        # DOWN
+        for x in range(i, 8, 1):
+            p = board[i][j]
+            if p == 0:
+                moves.append((j, x))
+                break
+
+
+        # LEFT
+        for x in range(j, -1, -1):
+            p = board[i][j]
+            if p == 0:
+                moves.append((x, i))
+                break
+
+
+        # RIGHT
+        for x in range(j, 8, 1):
+            p = board[i][j]
+            if p == 0:
+                moves.append((x, i))
+                break
+
+        return moves
