@@ -14,7 +14,7 @@ def redraw_gameWindow():
 
     win.blit(board, (0, 0))
    
-    bo.draw(win)
+    bo.draw(win, bo.board)
     
 
     pygame.display.update()

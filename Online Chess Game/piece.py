@@ -53,19 +53,13 @@ class Piece:
         self.selected = False
 
 
-    
-    def valid_moves(self):
-        pass
-
-
-
 
     def isSelected(self):
         return self.selected
     
 
 
-    def draw(self, win):
+    def draw(self, win, board):
                 
         if self.color == "w":
             drawThis = W[self.img]
@@ -74,11 +68,11 @@ class Piece:
             drawThis = B[self.img]
 
 
-        moves = self.valid_moves()
+        moves = self.valid_moves(board)
 
         for move in moves:
-            x = 5 + round(self.startX + (self.move[0] * self.rect[2]/8))
-            y = 5 + round(self.startY + (self.move[1] * self.rect[3]/8))
+            x = 5 + round(self.startX + (move[0] * self.rect[2]/8))
+            y = 5 + round(self.startY + (move[1] * self.rect[3]/8))
             pygame.draw.circle(win, (255, 0, 0), 10)
 
         x = 5 + round(self.startX + (self.col * self.rect[2]/8))
@@ -97,10 +91,15 @@ class Bishop(Piece):
     img = 0
 
 
+    def valid_moves(self, board):
+        return []
+
+
+
 class King(Piece):
     img = 1
 
-    def valid_moves(self):
+    def valid_moves(self, board):
         i = self.row
         j = self.col
 
@@ -233,9 +232,9 @@ class Queen(Piece):
 
     img = 4
 
-"""
-    def move(self, board):
-        
+
+    def valid_moves(self, board):
+       """ 
         i = self.row
         j = self.col
 
@@ -252,7 +251,8 @@ class Queen(Piece):
                 m2 = board[row][currentCol + 1]
 
 
-            currentCol += 1"""
+            currentCol += 1
+            """
 
 
 

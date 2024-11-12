@@ -63,25 +63,25 @@ class Board:
 
 
 
-        def draw(self, win):
+    def draw(self, win, board):
 
-            for i in range(self.rows):
-                for j in range(self.cols):
-                    if self.board[i][j] != 0:
-                        self.board[i][j].draw(win)
+        for i in range(self.rows):
+            for j in range(self.cols):
+                if self.board[i][j] != 0:
+                    self.board[i][j].draw(win, board)
 
 
         
 
-        def select(self, col, row):
+    def select(self, col, row):
 
-            for i in range(self.rows):
-                for j in range(self.cols):
-                    if self.board[i][j] != 0:
-                        self.board[i][j].selected = False
+        for i in range(self.rows):
+            for j in range(self.cols):
+                if self.board[i][j] != 0:
+                    self.board[i][j].selected = False
 
-            if self.board[row][col] != 0:
-                self.board[row][col].selected = True
+        if self.board[row][col] != 0:
+            self.board[row][col].selected = True
 
 
 
