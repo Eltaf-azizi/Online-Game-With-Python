@@ -82,3 +82,15 @@ class Board:
 
             if self.board[row][col] != 0:
                 self.board[row][col].selected = True
+
+
+
+    
+    def move(self, start, end):
+        
+        removed = self.board[end[1]][end[0]]
+        self.board[end[1]][end[0]] = self.board[start[1]][start[0]]
+        self.board[start[1]][start[0]] = 0
+
+
+        return removed

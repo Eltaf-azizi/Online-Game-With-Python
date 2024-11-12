@@ -73,6 +73,14 @@ class Piece:
         else:
             drawThis = B[self.img]
 
+
+        moves = self.valid_moves()
+
+        for move in moves:
+            x = 5 + round(self.startX + (self.move[0] * self.rect[2]/8))
+            y = 5 + round(self.startY + (self.move[1] * self.rect[3]/8))
+            pygame.draw.circle(win, (255, 0, 0), 10)
+
         x = 5 + round(self.startX + (self.col * self.rect[2]/8))
         y = 5 + round(self.startY + (self.row * self.rect[3]/8))
 
@@ -225,9 +233,28 @@ class Queen(Piece):
 
     img = 4
 
-
+"""
     def move(self, board):
-        pass
+        
+        i = self.row
+        j = self.col
+
+        moves = []
+
+        currentCol = j
+        currentCol = i
+
+        for now in range(0, 8):
+            if currentCol - 1 >= 0:
+                m1 = board[row][currentCol - 1]
+
+            if currentCol + 1 <= 7:
+                m2 = board[row][currentCol + 1]
+
+
+            currentCol += 1"""
+
+
 
 
 class Rook(Piece):
