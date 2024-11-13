@@ -68,12 +68,14 @@ class Piece:
             drawThis = B[self.img]
 
 
-        moves = self.valid_moves(board)
+        if self.selected:
+            moves = self.valid_moves(board)
 
-        for move in moves:
-            x = 5 + round(self.startX + (move[0] * self.rect[2]/8))
-            y = 5 + round(self.startY + (move[1] * self.rect[3]/8))
-            pygame.draw.circle(win, (255, 0, 0), 10)
+            for move in moves:
+                x = 5 + round(self.startX + (move[0] * self.rect[2]/8))
+                y = 5 + round(self.startY + (move[1] * self.rect[3]/8))
+                pygame.draw.circle(win, (255, 0, 0), 10)
+
 
         x = 5 + round(self.startX + (self.col * self.rect[2]/8))
         y = 5 + round(self.startY + (self.row * self.rect[3]/8))
@@ -110,20 +112,25 @@ class King(Piece):
 
         # TOP LEFT
             if j > 0:
-                moves.append((j - 1, i - 1))
+                p = board[i-1][j-1]
+                if p == 0 or p.color != self.color:
+                    moves.append((j - 1, i - 1))
 
 
         # TOP MIDDLE
-            moves.append((j, i - 1))
+            p = board[j][i-1]
+            if p == 0 or p.color != self.color:
+                moves.append((j, i - 1))
 
 
         # TOP RIGHT
             if j < 7:
-                moves.append((j + 1, i - 1))
+                p = board[j+1][i-1]
+                if p == 0 or p.color != self.color:
+                    moves.append((j + 1, i - 1))
 
         
         if i < 7:
-
         # BOTTOM LEFT
             if j > 0:
                 moves.append((j -1, i + 1))
@@ -165,21 +172,21 @@ class Knight(Piece):
         # DOWN LEFT
         if i < 6 and j > 0:
             p = board[i + 2][j-1]
-            if p == 0:
+            if p == 0 or p.color != self.color:
                 moves.append((j-1, i + 2))
 
 
         # UP LEFT
         if i > 1 and j > 0:
             p = board[i - 2][j-1]
-            if p == 0:
+            if p == 0 or p.color != self.color:
                 moves.append((j-1, i - 2))
 
 
         # DOWN RIGHT
         if i < 6 and j > 7:
             p = board[i + 2][j+1]
-            if p == 0:
+            if p == 0 or p.color != self.color:
                 moves.append((j + 1, i + 2))
 
 
@@ -187,7 +194,7 @@ class Knight(Piece):
         # UP RIGHT
         if i > 1 and j < 7:
             p = board[i - 2][j+1]
-            if p == 0:
+            if p == 0 or p.color != self.color:
                 moves.append((j + 1, i - 2))
 
         return moves
@@ -211,17 +218,33 @@ class Pawn(Piece):
 
 
         moves = []
-        if self.first:
-            if i < 6:
-                p = board[i+2][j]
-                if p == 0:
-                    moves.append((j, i+2))
+        if self.color == "b":
+
+            if self.first:
+                if i < 6:
+                    p = board[i+2][j]
+                    if p == 0:
+                        moves.append((j, i+2))
 
 
-            if i < 7:
-                p = board[i+1][j]
-                if p == 0:
-                    moves.append((j, i+1))
+                if i < 7:
+                    p = board[i+1][j]
+                    if p == 0:
+                        moves.append((j, i+1))
+
+        else:
+            if self.first:
+
+                if i < 1:
+                    p = board[i - 2][j]
+                    if p == 0:
+                        moves.append((j, i - 2))
+
+
+                if i < 0:
+                    p = board[i - 1][j]
+                    if p == 0:
+                        moves.append((j, i - 1))
 
             return moves
 
