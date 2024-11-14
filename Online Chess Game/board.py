@@ -7,7 +7,6 @@ from piece import Rook
 
 
 
-
 class Board:
     def __init__(self, cols, rows):
 

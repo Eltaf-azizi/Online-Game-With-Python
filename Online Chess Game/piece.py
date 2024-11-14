@@ -156,7 +156,7 @@ class King(Piece):
 
         # BOTTOM RIGHT
             if j < 7:
-                p = board[j+1][i+1]
+                p = board[i+1][j+1]
                 if p == 0:
                     moves.append((j + 1, i + 1))
                 elif p.color != self.color:
@@ -165,7 +165,7 @@ class King(Piece):
 
         # MIDDLE LEFT
         if j > 0:
-            p = board[j-1][i]
+            p = board[i][j-1]
             if p == 0:
                 moves.append((j - 1, i))
             elif p.color != self.color:
@@ -174,7 +174,7 @@ class King(Piece):
 
         # MIDDLE RIGHT
         if j < 7:
-            p = board[j+1][i]
+            p = board[i][j+1]
             if p == 0:
                 moves.append((j + 1, i))
             elif p.color != self.color:
@@ -259,6 +259,8 @@ class Pawn(Piece):
                     p = board[i+2][j]
                     if p == 0:
                         moves.append((j, i+2))
+                    elif p.color != self.color:
+                        moves.append((j, i+2))
 
 
                 if i < 7:
@@ -269,28 +271,30 @@ class Pawn(Piece):
 
                     # DIAGONAL
                     if j < 7:
-                        p = board[j+1][i+1]
+                        p = board[i+1][j+1]
                         if p != 0:
                             if p.color != self.color:
                                 moves.append((j+1, i+1))
 
 
                     if j > 7:
-                        p = board[j-1][i+1]
+                        p = board[i+1][j-1]
                         if p != 0:
                             if p.color != self.color:
                                 moves.append((j-1, i+1))
 
+
+        # WHITE
         else:
             if self.first:
 
-                if i < 1:
+                if i > 1:
                     p = board[i - 2][j]
                     if p == 0:
                         moves.append((j, i - 2))
 
 
-            if i < 0:
+            if i > 0:
                 p = board[i - 1][j]
                 if p == 0:
                     moves.append((j, i - 1))
@@ -298,17 +302,17 @@ class Pawn(Piece):
 
 
             if j < 7:
-                p = board[j+1][i-1]
+                p = board[i+1][j+1]
                 if p != 0:
                     if p.color != self.color:
                         moves.append((j+1, i+1))
 
 
             if j > 0:
-                p = board[j-1][i-1]
+                p = board[i-1][j-1]
                 if p != 0:
                     if p.color != self.color:
-                        moves.append((j-1, i+1))
+                        moves.append((j-1, i-1))
 
 
         return moves
