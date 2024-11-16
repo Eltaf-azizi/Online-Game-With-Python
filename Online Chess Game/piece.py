@@ -334,17 +334,36 @@ class Queen(Piece):
 
 
         # TOP RIGHT
-        dj = j + 1
-        for di in range(i+1, 8):
-            p = board[di][dj]
+        if j < 7:
+            dj = j + 1
+            for di in range(i+1, 8):
+                p = board[di][dj]
 
-            if p == 0:
-               moves.append((dj, di))
+                if p == 0:
+                    moves.append((dj, di))
 
-            elif p.color != self.color:
-               moves.append((dj, di))
+                elif p.color != self.color:
+                    moves.append((dj, di))
 
-            dj += 1
+                dj += 1
+
+
+
+        
+        # TOP RIGHT
+        if j > 1:
+            dj = j - 1
+            for di in range(i-1, -1, -1):
+                p = board[di][dj]
+
+                if p == 0:
+                    moves.append((dj, di))
+
+                elif p.color != self.color:
+                    moves.append((dj, di))
+
+                dj += 1
+
 
 
         return moves
