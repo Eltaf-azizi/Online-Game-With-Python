@@ -334,37 +334,66 @@ class Queen(Piece):
 
 
         # TOP RIGHT
-        if j < 7:
-            dj = j + 1
-            for di in range(i+1, 8):
-                p = board[di][dj]
+        djL = j + 1
+        djR = j - 1
+
+        for di in range(i-1, -1, -1):
+            if djL < 8:
+                p = board[di][djL]
 
                 if p == 0:
-                    moves.append((dj, di))
+                    moves.append((djL, di))
 
                 elif p.color != self.color:
-                    moves.append((dj, di))
+                    moves.append((djL, di))
 
-                dj += 1
+            djL += 1
+
+
+
+            if djR > -1:
+                p = board[di][djR]
+
+                if p == 0:
+                    moves.append((djR, di))
+
+                elif p.color != self.color:
+                    moves.append((djR, di))
+
+            djR -= 1
 
 
 
         
-        # TOP RIGHT
-        if j > 1:
-            dj = j - 1
-            for di in range(i-1, -1, -1):
-                p = board[di][dj]
+        # TOP LEFT
+
+        djL = j + 1
+        djR = j - 1
+
+        for di in range(i+1, 8):
+            if djL < 8:
+                p = board[di][djL]
 
                 if p == 0:
-                    moves.append((dj, di))
+                    moves.append((djL, di))
 
                 elif p.color != self.color:
-                    moves.append((dj, di))
+                    moves.append((djL, di))
 
-                dj += 1
+            djL += 1
 
 
+
+            if djR > -1:
+                p = board[di][djR]
+
+                if p == 0:
+                    moves.append((djR, di))
+
+                elif p.color != self.color:
+                    moves.append((djR, di))
+
+            djR -= 1
 
         return moves
             
