@@ -56,8 +56,6 @@ def main():
                 quit()
                 pygame.quit()
 
-            if event.type == pygame.MOUSEMOTION:
-                pass
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pos = pygame.mouse.get_pos()

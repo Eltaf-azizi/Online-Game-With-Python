@@ -82,14 +82,26 @@ class Board:
 
     def select(self, col, row):
 
+        prev_selected = 0
         for i in range(self.rows):
             for j in range(self.cols):
                 if self.board[i][j] != 0:
+                    if self.board[i][j]:
+                        prev_selected = (i, j)
+
                     self.board[i][j].selected = False
 
         if self.board[row][col] != 0:
             self.board[row][col].selected = True
+            
+        
+        else:
+            selected = (col, row)
+            moves = self.board[row][col].move_list
 
+        if selected in moves:
+            print(prev_selected, (col, row))
+            self.move(prev_selected, (col, row))
 
 
     
