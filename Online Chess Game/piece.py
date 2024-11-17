@@ -94,7 +94,81 @@ class Bishop(Piece):
 
 
     def valid_moves(self, board):
-        return []
+       
+        i = self.row
+        j = self.col
+
+        moves = []
+
+
+        # TOP RIGHT
+        djL = j + 1
+        djR = j - 1
+
+        for di in range(i-1, -1, -1):
+            if djL < 8:
+                p = board[di][djL]
+
+                if p == 0:
+                    moves.append((djL, di))
+
+                elif p.color != self.color:
+                    moves.append((djL, di))
+
+            djL += 1
+
+
+
+            if djR > -1:
+                p = board[di][djR]
+
+                if p == 0:
+                    moves.append((djR, di))
+
+                elif p.color != self.color:
+                    moves.append((djR, di))
+
+            djR -= 1
+
+
+
+        
+        # TOP LEFT
+
+        djL = j + 1
+        djR = j - 1
+
+        for di in range(i+1, 8):
+            if djL < 8:
+                p = board[di][djL]
+
+                if p == 0:
+                    moves.append((djL, di))
+
+                elif p.color != self.color:
+                    moves.append((djL, di))
+                
+                else:
+                    break
+            else:
+                break
+
+            djL += 1
+
+
+
+            if djR > -1:
+                p = board[di][djR]
+
+                if p == 0:
+                    moves.append((djR, di))
+
+                elif p.color != self.color:
+                    moves.append((djR, di))
+
+            djR -= 1
+
+        return moves
 
 
 
