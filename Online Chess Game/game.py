@@ -61,6 +61,7 @@ def main():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pos = pygame.mouse.get_pos()
+                bo.update_moves(bo.board)
                 i, j = click(pos)
                 bo.select(i, j)
 

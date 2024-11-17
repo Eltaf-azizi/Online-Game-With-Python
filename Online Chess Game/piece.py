@@ -51,6 +51,7 @@ class Piece:
         self.col = col
         self.color = color
         self.selected = False
+        self.move_list = []
 
 
 
@@ -58,8 +59,12 @@ class Piece:
         return self.selected
     
 
+    def update_valid_moves(self):
+        self.move_list = self.valid_moves(board)
+    
 
-    def draw(self, win, board):
+
+    def draw(self, win):
                 
         if self.color == "w":
             drawThis = W[self.img]
@@ -69,7 +74,7 @@ class Piece:
 
 
         if self.selected:
-            moves = self.valid_moves(board)
+            moves = self.move_list
 
             for move in moves:
                 x = 5 + round(self.startX + (move[0] * self.rect[2]/8))
@@ -115,10 +120,16 @@ class Bishop(Piece):
                 elif p.color != self.color:
                     moves.append((djL, di))
 
+                else:
+                    break
+
+            else:
+                break
+
             djL += 1
 
 
-
+        for di in range(i -1, -1, -1):
             if djR > -1:
                 p = board[di][djR]
 
