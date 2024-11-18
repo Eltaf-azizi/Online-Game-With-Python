@@ -82,13 +82,36 @@ class Board:
 
     def select(self, col, row):
 
+        prev = (-1, -1)
+        for i in range(self.rows):
+            for j in range(self.cols):
+                if self.board[i][j] != 0:
+                    if self.board[i][j].selected:
+                        prev = (i, j)
+
+
+        # if piece
+        if self.board[row][col] != 0:
+            self.reset_selected()
+            self.board[row][col].selected = True
+        
+        else:
+            moves = self.board[prev[0]][prev[1]].move_list
+
+            if (row, col) in moves:
+                self.move(prev, (row, col))
+        
+
+
+    def reset_selected(self):
         for i in range(self.rows):
             for j in range(self.cols):
                 if self.board[i][j] != 0:
                     self.board[i][j].selected = False
 
-
     
+
+
     def move(self, start, end):
         
         removed = self.board[end[1]][end[0]]
