@@ -91,17 +91,18 @@ class Board:
 
 
         # if piece
-        if self.board[row][col] != 0:
+        if self.board[row][col] == 0:
+
+            moves = self.board[prev[0]][prev[1]].move_list
+            if (col, row) in moves:
+                self.move(prev, (row, col))
+            self.reset_selected()
+
+
+        else:
             self.reset_selected()
             self.board[row][col].selected = True
         
-        else:
-            moves = self.board[prev[0]][prev[1]].move_list
-
-            if (row, col) in moves:
-                self.move(prev, (row, col))
-        
-
 
     def reset_selected(self):
         for i in range(self.rows):
@@ -114,10 +115,9 @@ class Board:
 
     def move(self, start, end):
         
-        removed = self.board[end[1]][end[0]]
-        self.board[end[1]][end[0]] = self.board[start[1]][start[0]]
-        self.board[start[1]][start[0]] = 0
-
-
-
-        return removed
+        nBoard = self.board[:]
+        nBoard[start[0]][start[1]].row = start[0]
+        nBoard[start[0]][start[1]].col = start[1]
+        nBoard[end[1]][end[0]] = nBoard[start[1]][start[0]]
+        nBoard[start[0]][start[1]] = 0
+        self.board = nBoard
