@@ -94,6 +94,17 @@ class Piece:
 
 
 
+    def change_pos(self, pos):
+        self.row = pos[1]
+        self.col = pos[0]
+
+
+
+    def __str__(self):
+        return str(self.col) + " " + str(self.row)
+
+
+
 class Bishop(Piece):
     img = 0
 

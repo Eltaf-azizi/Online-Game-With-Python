@@ -116,8 +116,11 @@ class Board:
     def move(self, start, end):
         
         nBoard = self.board[:]
-        nBoard[start[0]][start[1]].row = start[0]
-        nBoard[start[0]][start[1]].col = start[1]
-        nBoard[end[1]][end[0]] = nBoard[start[1]][start[0]]
+        print(nBoard[start[0]][start[1]])
+        print(nBoard[end[0]][end[1]])
+        nBoard[start[0]][start[1]].change_pos((start[1], start[0]))
+        nBoard[end[0]][end[1]] = nBoard[start[0]][start[1]]
         nBoard[start[0]][start[1]] = 0
+        print(nBoard[start[0]][start[1]])
+        print(nBoard[end[0]][end[1]])
         self.board = nBoard
