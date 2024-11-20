@@ -442,6 +442,7 @@ class Queen(Piece):
 
                 elif p.color != self.color:
                     moves.append((djL, di))
+                    break
 
             djL += 1
 
@@ -455,6 +456,7 @@ class Queen(Piece):
 
                 elif p.color != self.color:
                     moves.append((djR, di))
+                    break
 
             djR -= 1
 
@@ -475,6 +477,7 @@ class Queen(Piece):
 
                 elif p.color != self.color:
                     moves.append((djL, di))
+                    break
 
             djL += 1
 
@@ -488,6 +491,7 @@ class Queen(Piece):
 
                 elif p.color != self.color:
                     moves.append((djR, di))
+                    break
 
             djR -= 1
 
@@ -496,7 +500,8 @@ class Queen(Piece):
             p = board[x][j]
             if p == 0:
                 moves.append((j, x))
-            else:
+            elif p.color != self.color:
+                moves.append((j, x))
                 break
 
 
@@ -505,7 +510,8 @@ class Queen(Piece):
             p = board[x][j]
             if p == 0:
                 moves.append((j, x))
-            else:
+            elif p.color != self.color:
+                moves.append((j, x))
                 break
 
 
@@ -514,7 +520,8 @@ class Queen(Piece):
             p = board[i][x]
             if p == 0:
                 moves.append((x, i))
-            else:
+            elif p.color != self.color:
+                moves.append((x, i))
                 break
 
 
@@ -523,11 +530,13 @@ class Queen(Piece):
             p = board[i][x]
             if p == 0:
                 moves.append((x, i))
-            else:
+            elif p.color != self.color:
+                moves.append((x, i))
                 break
 
 
         return moves
+
             
 
 class Rook(Piece):
@@ -548,6 +557,9 @@ class Rook(Piece):
             p = board[x][j]
             if p == 0:
                 moves.append((j, x))
+            elif p.color != self.color:
+                moves.append((j, x))
+                break
             else:
                 break
 
@@ -557,6 +569,9 @@ class Rook(Piece):
             p = board[x][j]
             if p == 0:
                 moves.append((j, x))
+            elif p.color != self.color:
+                moves.append((j, x))
+                break
             else:
                 break
 
@@ -566,6 +581,9 @@ class Rook(Piece):
             p = board[i][x]
             if p == 0:
                 moves.append((x, i))
+            elif p.color != self.color:
+                moves.append((x, i))
+                break
             else:
                 break
 
@@ -575,6 +593,9 @@ class Rook(Piece):
             p = board[i][x]
             if p == 0:
                 moves.append((x, i))
+            elif p.color != self.color:
+                moves.append((x, i))
+                break
             else:
                 break
 
