@@ -95,8 +95,8 @@ class Piece:
 
 
     def change_pos(self, pos):
-        self.row = pos[1]
-        self.col = pos[0]
+        self.row = pos[0]
+        self.col = pos[1]
 
 
 
@@ -490,6 +490,42 @@ class Queen(Piece):
                     moves.append((djR, di))
 
             djR -= 1
+
+        # UP
+        for x in range(i-1, -1, -1):
+            p = board[x][j]
+            if p == 0:
+                moves.append((j, x))
+            else:
+                break
+
+
+        # DOWN
+        for x in range(i+1, 8, 1):
+            p = board[x][j]
+            if p == 0:
+                moves.append((j, x))
+            else:
+                break
+
+
+        # LEFT
+        for x in range(j-1, -1, -1):
+            p = board[i][x]
+            if p == 0:
+                moves.append((x, i))
+            else:
+                break
+
+
+        # RIGHT
+        for x in range(j+1, 8, 1):
+            p = board[i][x]
+            if p == 0:
+                moves.append((x, i))
+            else:
+                break
+
 
         return moves
             
