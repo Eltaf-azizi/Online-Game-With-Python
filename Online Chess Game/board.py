@@ -78,6 +78,32 @@ class Board:
                     self.board[i][j].draw(win)
 
 
+
+    def check(self, color):
+
+        danger_moves = []
+        king_moves = []
+        for i in range(self.rows):
+            for j in range(self.cols):
+                if self.board[i][j] != 0:
+                    if self.board[i][j].color != color:
+                        danger_moves.append(self.board[i][j].move_list)
+
+                    else:
+                        if self.board[i][j].king:
+                            king_moves.append(self.board[i][j].move_list)
+
+
+        if len(king_moves) == 0:
+            return False
+        
+        
+        for move in king_moves:
+            if not move in danger_moves:
+                return False
+            
+        return True
+
         
 
     def select(self, col, row):
@@ -100,11 +126,14 @@ class Board:
 
 
         else:
-            if self.board[prev[0]][prev[1]].color != self.board[row][col].color:
+            if self.board[prev[0]][prev[1]].color != self.board[row][col].color:\
+
                 moves = self.board[prev[0]][prev[1]].move_list
                 if (col, row) in moves:
                     self.move(prev, (row, col))
+
                 self.reset_selected()
+                self.board[row][col].selected = True
 
 
             else:

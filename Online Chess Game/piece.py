@@ -52,6 +52,7 @@ class Piece:
         self.color = color
         self.selected = False
         self.move_list = []
+        self.king = False
 
 
 
@@ -208,6 +209,14 @@ class Bishop(Piece):
 
 class King(Piece):
     img = 1
+
+
+    def __init__(self, row, col, color):
+        super().__init__(row, col, color)
+        self.king = True
+
+
+
 
     def valid_moves(self, board):
         i = self.row
