@@ -130,6 +130,7 @@ class Bishop(Piece):
 
                 elif p.color != self.color:
                     moves.append((djL, di))
+                    break
 
                 else:
                     break
@@ -149,6 +150,11 @@ class Bishop(Piece):
 
                 elif p.color != self.color:
                     moves.append((djR, di))
+                    break
+                else:
+                    break
+            else:
+                break
 
             djR -= 1
 
@@ -169,6 +175,7 @@ class Bishop(Piece):
 
                 elif p.color != self.color:
                     moves.append((djL, di))
+                    break
                 
                 else:
                     break
@@ -187,6 +194,11 @@ class Bishop(Piece):
 
                 elif p.color != self.color:
                     moves.append((djR, di))
+                    break
+                else:
+                    break
+            else:
+                break
 
             djR -= 1
 
@@ -478,6 +490,8 @@ class Queen(Piece):
                 elif p.color != self.color:
                     moves.append((djL, di))
                     break
+                else:
+                    break
 
             djL += 1
 
@@ -492,6 +506,8 @@ class Queen(Piece):
                 elif p.color != self.color:
                     moves.append((djR, di))
                     break
+                else:
+                    break
 
             djR -= 1
 
@@ -503,6 +519,8 @@ class Queen(Piece):
             elif p.color != self.color:
                 moves.append((j, x))
                 break
+            else:
+                break
 
 
         # DOWN
@@ -512,6 +530,8 @@ class Queen(Piece):
                 moves.append((j, x))
             elif p.color != self.color:
                 moves.append((j, x))
+                break
+            else:
                 break
 
 
@@ -523,6 +543,8 @@ class Queen(Piece):
             elif p.color != self.color:
                 moves.append((x, i))
                 break
+            else:
+                break
 
 
         # RIGHT
@@ -532,6 +554,8 @@ class Queen(Piece):
                 moves.append((x, i))
             elif p.color != self.color:
                 moves.append((x, i))
+                break
+            else:
                 break
 
 
