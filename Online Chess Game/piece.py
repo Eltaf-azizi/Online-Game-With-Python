@@ -465,6 +465,9 @@ class Queen(Piece):
                     moves.append((djL, di))
                     break
 
+                else:
+                    djL = 9
+
             djL += 1
 
 
@@ -478,6 +481,9 @@ class Queen(Piece):
                 elif p.color != self.color:
                     moves.append((djR, di))
                     break
+
+                else:
+                    djR = -1
 
             djR -= 1
 

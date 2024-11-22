@@ -63,6 +63,8 @@ def main():
                 i, j = click(pos)
                 bo.select(i, j)
                 bo.update_moves()
+                print("White: ", bo.is_checked("w"))
+                print("Black", bo.is_checked("b"))
 
 
 width = 750
