@@ -79,9 +79,21 @@ class Board:
 
 
 
-    def check(self, color):
+    def get_danger_moves(self, color):
 
         danger_moves = []
+        for i in range(self.rows):
+            for j in range(self.cols):
+                if self.board[i][j] != 0:
+                    if self.board[i][j].color != color:
+                        danger_moves.append(self.board[i][j].move_list)
+
+
+
+
+    def checkMate(self, color):
+
+        danger_moves = self.get_danger_moves()
         king_moves = []
         for i in range(self.rows):
             for j in range(self.cols):
@@ -104,7 +116,24 @@ class Board:
             
         return True
 
-        
+
+
+    def is_checked(self, color):
+
+        danger_moves = self.get_danger_moves()
+        king_moves = []
+        for i in range(self.rows):
+            for j in range(self.cols):
+                if self.board[i][j] != 0:
+                    if self.board[i][j].color != color:
+                        danger_moves.append(self.board[i][j].move_list)
+
+                    else:
+                        if self.board[i][j].king:
+                            king_moves.append(self.board[i][j].move_list)
+
+
+
 
     def select(self, col, row):
 
