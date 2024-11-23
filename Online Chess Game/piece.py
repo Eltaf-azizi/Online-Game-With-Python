@@ -348,6 +348,48 @@ class Knight(Piece):
             elif p.color != self.color:
                 moves.append((j+1, i-2))
 
+
+
+        if i > 0 and j > 1:
+            p = board[i - 1][j - 2]
+            if p == 0:
+                moves.append(j - 2,  - 1)
+
+            elif p.color != self.color:
+                moves.append((j - 2, i - 1))
+
+
+        
+        if i > 0 and j < 6:
+            p = board[i - 1][j + 2]
+            if p == 0:
+                moves.append(j + 2,  - 1)
+
+            elif p.color != self.color:
+                moves.append((j + 2, i - 1))
+
+        
+
+        if i < 7 and j > 1:
+            p = board[i + 1][j - 2]
+            if p == 0:
+                moves.append(j - 2,  + 1)
+
+            elif p.color != self.color:
+                moves.append((j - 2, i + 1))
+
+
+
+        if i < 7 and j < 6:
+            p = board[i + 1][j + 2]
+            if p == 0:
+                moves.append(j + 2,  + 1)
+
+            elif p.color != self.color:
+                moves.append((j + 2, i + 1))
+
+
+
         return moves
 
 

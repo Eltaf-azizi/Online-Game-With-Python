@@ -103,7 +103,8 @@ class Board:
                 if self.board[i][j] != 0:
 
                     if self.board[i][j].king and self.board[i][j].color == color:
-                        king_moves.append(self.board[i][j].move_list)
+                        for move in self.board[i][j].move_list:
+                            king_moves.append(move)
 
 
         if len(king_moves) == 0:
