@@ -10,14 +10,40 @@ rect = (113, 113, 525, 525)
 
 
 def redraw_gameWindow():
-    global win, bo
 
+    global win, bo
     win.blit(board, (0, 0))
-   
     bo.draw(win, bo.board)
-    
 
     pygame.display.update()
+
+
+
+def end_screen(win, text):
+
+    pygame.font.init()
+    font = pygame.font.SysFont("comicsans", 80)
+    txt = font.render(text, 1, (255, 0, 0))
+    win.blit(txt, (width/2 - txt.get_width()/2, 300))
+    pygame.display.update()
+
+    pygame.set_timer(pygame.USEREVENT+1, 5000)
+
+
+    run = True
+    while run:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+                run = False
+
+            elif event.type == pygame.KEYDOWN:
+                run = False
+
+            elif event.type == pygame.USEREVENT+1:
+                run = False
+
 
 
 def click(pos):
@@ -67,8 +93,11 @@ def main():
 
 
         # check for checkmate
-        bo.checkMate("w")
-        bo.checkMate("b")
+        if bo.checkMate("w"):
+            end_screen(win, "Black Wins!")
+
+        elif bo.checkMate("b"):
+            end_screen(win, "White Wins!")
 
 width = 750
 height = 750
