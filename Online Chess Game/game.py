@@ -42,6 +42,7 @@ def click(pos):
 def main():
     global bo
     bo = Board(8, 8)
+    bo.update_moves()
     clock = pygame.time.Clock()
     run = True
 
@@ -63,9 +64,11 @@ def main():
                 i, j = click(pos)
                 bo.select(i, j)
                 bo.update_moves()
-                print("White: ", bo.is_checked("w"))
-                print("Black", bo.is_checked("b"))
 
+
+        # check for checkmate
+        bo.checkMate("w")
+        bo.checkMate("b")
 
 width = 750
 height = 750

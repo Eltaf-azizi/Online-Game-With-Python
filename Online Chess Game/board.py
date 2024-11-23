@@ -86,7 +86,8 @@ class Board:
             for j in range(self.cols):
                 if self.board[i][j] != 0:
                     if self.board[i][j].color != color:
-                        danger_moves.append(self.board[i][j].move_list)
+                        for move in self.board[i][j].move_list:
+                            danger_moves.append(move)
 
 
         return danger_moves
@@ -128,13 +129,14 @@ class Board:
                 if self.board[i][j] != 0:
 
                     if self.board[i][j].king and self.board[i][j].color == color:
-                        king_pos = (i, j)
-
-        if king_pos not in danger_moves:
-            return False
-
-        else:
-            return True
+                        for move in self.board[i][j].move_list:
+                            king_pos = (j, i)
+        
+    
+        if king_pos in danger_moves:
+                return True
+            
+        return False
 
 
 
@@ -184,8 +186,10 @@ class Board:
 
 
     def move(self, start, end):
-        
         nBoard = self.board[:]
+        if nBoard[start[0]][start[1]].pawn:
+            nBoard[start[0]][start[1]].first = False
+
         nBoard[start[0]][start[1]].change_pos((end[0], end[1]))
         nBoard[end[0]][end[1]] = nBoard[start[0]][start[1]]
         nBoard[start[0]][start[1]] = 0
