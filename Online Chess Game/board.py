@@ -141,8 +141,9 @@ class Board:
 
 
 
-    def select(self, col, row):
+    def select(self, col, row, color):
 
+        changed = False
         prev = (-1, -1)
         for i in range(self.rows):
             for j in range(self.cols):
@@ -157,23 +158,30 @@ class Board:
             moves = self.board[prev[0]][prev[1]].move_list
             if (col, row) in moves:
                 self.move(prev, (row, col))
+                changed = True
             self.reset_selected()
 
 
         else:
-            if self.board[prev[0]][prev[1]].color != self.board[row][col].color:\
+            if self.board[prev[0]][prev[1]].color != self.board[row][col].color:
 
                 moves = self.board[prev[0]][prev[1]].move_list
                 if (col, row) in moves:
                     self.move(prev, (row, col))
+                    changed = True
 
                 self.reset_selected()
-                self.board[row][col].selected = True
+                if self.board[row][col].color == color:
+                    self.board[row][col].selected = True
 
 
             else:
                 self.reset_selected()
-                self.board[row][col].selected = True
+                if self.board[row][col].color == color:
+                    self.board[row][col].selected = True
+
+        return changed
+
         
 
     def reset_selected(self):

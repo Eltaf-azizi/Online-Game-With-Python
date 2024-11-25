@@ -66,7 +66,9 @@ def click(pos):
 
 
 def main():
+
     global bo
+    turn = "w"
     bo = Board(8, 8)
     bo.update_moves()
     clock = pygame.time.Clock()
@@ -88,9 +90,17 @@ def main():
                 pos = pygame.mouse.get_pos()
                 bo.update_moves()
                 i, j = click(pos)
-                bo.select(i, j)
+                change = bo.select(i, j, turn)
                 bo.update_moves()
 
+
+                if change:
+                    if turn == "w":
+                        turn = "b"
+
+                    else:
+                        turn = "w"
+                
 
         # check for checkmate
         if bo.checkMate("w"):
