@@ -2,6 +2,8 @@ import pygame
 import os
 from piece import Bishop
 from board import Board
+import time
+pygame.font.init()
 
 
 board = pygame.transform.scale(pygame.image.load(os.path.join("image", "board_alt.png")), (750, 750))
@@ -9,11 +11,15 @@ rect = (113, 113, 525, 525)
 
 
 
-def redraw_gameWindow():
+def redraw_gameWindow(win, bo, p1, p2):
 
-    global win, bo
     win.blit(board, (0, 0))
-    bo.draw(win, bo.board)
+    bo.draw(win)
+    font = pygame.font.SysFont("comicsans", 80)
+    txt = font.render("Player 1 Time: " + str(p1), 1, (255, 255, 255))
+    txt2 = font.render("Player 2 Time: " + str(p2), 1, (255, 255, 255))
+    win.blit(txt, (550, 10))
+    win.blit(txt, (550, 700))
 
     pygame.display.update()
 
@@ -67,17 +73,30 @@ def click(pos):
 
 def main():
 
-    global bo
+    p1Time = 60 * 15
+    p2Time = 60 * 15
     turn = "w"
     bo = Board(8, 8)
     bo.update_moves()
     clock = pygame.time.Clock()
     run = True
+    startTime = time.time()
 
     while run:
-        clock.tick(10)
 
-        redraw_gameWindow()
+        clock.tick(10)
+        timeGone = int(time.time() - startTime)
+        if turn == "w":
+            p1Time -= timeGone
+            turn = "b"
+
+        else:
+            p2Time -= timeGone
+            turn = "w"
+
+        
+
+        redraw_gameWindow(win, bo)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -95,6 +114,8 @@ def main():
 
 
                 if change:
+                    timeGone = int(time.time() - startTime)
+                    startTime = time.time()
                     if turn == "w":
                         turn = "b"
 
