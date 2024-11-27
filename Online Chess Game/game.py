@@ -15,11 +15,20 @@ def redraw_gameWindow(win, bo, p1, p2):
 
     win.blit(board, (0, 0))
     bo.draw(win)
+
+    formatTime1 = str(p1 // 60) + ":" + str(p1 % 60)
+    formatTime2 = str(p2 // 60) + ":" + str(p2 % 60)
+
+    if p1 % 60 == 0:
+        formatTime1 += "0"
+    if p2 % 60 == 0:
+        formatTime2 += "0"
+
     font = pygame.font.SysFont("comicsans", 80)
-    txt = font.render("Player 1 Time: " + str(p1), 1, (255, 255, 255))
-    txt2 = font.render("Player 2 Time: " + str(p2), 1, (255, 255, 255))
-    win.blit(txt, (550, 10))
-    win.blit(txt, (550, 700))
+    txt = font.render("Player 2 Time: " + str(formatTime2), 1, (255, 255, 255))
+    txt2 = font.render("Player 1 Time: " + str(formatTime1), 1, (255, 255, 255))
+    win.blit(txt, (540, 10))
+    win.blit(txt2, (540, 700))
 
     pygame.display.update()
 
@@ -73,8 +82,8 @@ def click(pos):
 
 def main():
 
-    p1Time = 60 * 15
-    p2Time = 60 * 15
+    p1Time = 900
+    p2Time = 900
     turn = "w"
     bo = Board(8, 8)
     bo.update_moves()
@@ -85,18 +94,16 @@ def main():
     while run:
 
         clock.tick(10)
-        timeGone = int(time.time() - startTime)
+
         if turn == "w":
-            p1Time -= timeGone
-            turn = "b"
+            p1Time -= p1Time - (time.time() - startTime)
 
         else:
-            p2Time -= timeGone
-            turn = "w"
+            p2Time -= p2Time - (time.time() - startTime)
 
-        
+        startTime = time.time()
 
-        redraw_gameWindow(win, bo)
+        redraw_gameWindow(win, bo, int(p1Time), int(p2Time))
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -114,7 +121,6 @@ def main():
 
 
                 if change:
-                    timeGone = int(time.time() - startTime)
                     startTime = time.time()
                     if turn == "w":
                         turn = "b"
