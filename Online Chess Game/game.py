@@ -42,7 +42,7 @@ def end_screen(win, text):
     win.blit(txt, (width/2 - txt.get_width()/2, 300))
     pygame.display.update()
 
-    pygame.set_timer(pygame.USEREVENT+1, 5000)
+    pygame.set_timer(pygame.USEREVENT+1, 3000)
 
 
     run = True

@@ -157,7 +157,7 @@ class Board:
    
             moves = self.board[prev[0]][prev[1]].move_list
             if (col, row) in moves:
-                self.move(prev, (row, col))
+                self.move(prev, (row, col), color)
                 changed = True
             self.reset_selected()
 
@@ -167,8 +167,8 @@ class Board:
 
                 moves = self.board[prev[0]][prev[1]].move_list
                 if (col, row) in moves:
-                    self.move(prev, (row, col))
-                    changed = True
+                    changed = self.move(prev, (row, col), color)
+
 
                 self.reset_selected()
                 if self.board[row][col].color == color:
@@ -193,7 +193,10 @@ class Board:
     
 
 
-    def move(self, start, end):
+    def move(self, start, end, color):
+
+        checkedBefore = self.is_checked(color)
+        changed = True
         nBoard = self.board[:]
         if nBoard[start[0]][start[1]].pawn:
             nBoard[start[0]][start[1]].first = False
@@ -202,3 +205,23 @@ class Board:
         nBoard[end[0]][end[1]] = nBoard[start[0]][start[1]]
         nBoard[start[0]][start[1]] = 0
         self.board = nBoard
+
+
+
+        self.update_moves()
+
+        if self.is_checked(color) or (checkedBefore and self.is_checked(color)):
+            
+            changed = False
+            print("checked")
+            nBoard = self.board[:]
+            if nBoard[start[0]][start[1]].pawn:
+                nBoard[start[0]][start[1]].first = True
+
+            nBoard[end[0]][end[1]].change_pos((start[0], start[1]))
+            nBoard[start[0]][start[1]] = nBoard[end[0]][end[1]]
+            nBoard[end[0]][end[1]] = 0
+            self.board = nBoard
+
+
+        return changed
